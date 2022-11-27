@@ -1,4 +1,4 @@
-class UserAccount:
+class User:
 	def __init__(self, identifier, password, phoneNumber, name):
 		self.identifier = identifier
 		self.password = password
