@@ -1,23 +1,23 @@
 class moneyTransfer:
-    def __init__(self,bankaccount,bank,accountpsw):
-        self.bankaccount = bankaccount
+    def __init__(self,bank_account,bank,bank_psw):
+        self.bank_account = bank_account
         self.bank = bank
-        self.accountpsw = accountpsw
+        self.bank_psw = bank_psw
 
-    def setBankaccount(self,bankaccount):
-        self.bankaccount = bankaccount
-    
+    def setBankaccount(self,bank_account):
+        self.bank_account = bank_account
+
     def setBank(self,bank):
         self.bank = bank
     
-    def setAccountpsw(self,accountpsw):
-        self.accountpsw = accountpsw
+    def setAccountpsw(self,bank_psw):
+        self.bank_psw = bank_psw
 
     def getBankaccount(self):
-        return self.bankaccount
+        return self.bank_account
     
     def getBank(self):
         return self.bank
     
     def getAccountpsw(self):
-        return self.accountpsw
+        return self.bank_psw
