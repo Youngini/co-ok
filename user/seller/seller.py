@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../user')
+sys.path.append('..')
 
 from user import User
 
