@@ -4,55 +4,55 @@ sys.path.append('../user')
 from user import User
 
 class Seller(User):
-	def __init__(self, identifier, password, phoneNumber, name, businessName, emailAddress, sellerAccount, telephoneNumber, businessAddress, telesellingRegistration):
-		super().__init__(identifier, password, phoneNumber, name)
-		self.businessName = businessName
-		self.emailAddress = emailAddress
-		self.sellerAccount = sellerAccount
-		self.telephoneNumber = telephoneNumber
-		self.businessAddress = businessAddress
-		self.telesellingRegistration = telesellingRegistration
+	def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration):
+		super().__init__(identifier, password, phone_number, name)
+		self.business_name = business_name
+		self.email_address = email_address
+		self.seller_account = seller_account
+		self.telephone_number = telephone_number
+		self.business_address = business_address
+		self.teleselling_registration = teleselling_registration
 	
-	def setBusinessName(self, businessName):
-		self.businessName = businessName
+	def set_business_name(self, business_name):
+		self.business_name = business_name
 	
-	def setEmailAddress(self, emailAddress):
-		self.emailAddress = emailAddress
+	def set_email_address(self, email_address):
+		self.email_address = email_address
 	
-	def setSellerAccount(self, sellerAccount):
-		self.sellerAccount = sellerAccount
+	def set_seller_account(self, seller_account):
+		self.seller_account = seller_account
 	
-	def setTelephoneNumber(self, telephoneNumber):
-		self.telephoneNumber = telephoneNumber
+	def set_telephone_number(self, telephone_number):
+		self.telephone_number = telephone_number
 
-	def setBusinessAddress(self, businessAddress):
-		self.businessAddress = businessAddress
+	def set_business_address(self, business_address):
+		self.business_address = business_address
 	
-	def getBusinessName(self):
-		return self.businessName
+	def get_business_name(self):
+		return self.business_name
 
-	def getEmailAddress(self):
-		return self.emailAddress
+	def get_email_address(self):
+		return self.email_address
 
-	def getSellerAccount(self):
-		return self.sellerAccount
+	def get_seller_account(self):
+		return self.seller_account
 	
-	def getTelephoneNumber(self):
-		return self.telephoneNumber
+	def get_telephone_number(self):
+		return self.telephone_number
 
-	def getBusinessAddress(self):
-		return self.businessAddress
+	def get_business_address(self):
+		return self.business_address
 
-	def getItemNumber(self):
+	def get_item_number(self):
 		#get number of item by query to sql
 		#develop soon
 		pass
 
-class IndividualSeller(Seller):	
-	def __init__(self, identifier, password, phoneNumber, name, businessName, emailAddress, sellerAccount, telephoneNumber, businessAddress, telesellingRegistration):
-		super().__init__(identifier, password, phoneNumber, name, businessName, emailAddress, sellerAccount, telephoneNumber, businessAddress, telesellingRegistration)
+class Individual_seller(Seller):	
+	def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration):
+		super().__init__(identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration)
 
 class CorporateSeller(Seller):
-	def __init__(self, identifier, password, phoneNumber, name, businessName, emailAddress, sellerAccount, telephoneNumber, businessAddress, telesellingRegistration, businessResgistration):
-		super().__init__(identifier, password, phoneNumber, name, businessName, emailAddress, sellerAccount, telephoneNumber, businessAddress, telesellingRegistration)
-		self.businessRegistration = businessRegistration
+	def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration, business_registration):
+		super().__init__(identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration)
+		self.business_registration = business_registration

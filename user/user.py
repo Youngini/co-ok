@@ -1,30 +1,30 @@
 class User:
-	def __init__(self, identifier, password, phoneNumber, name):
+	def __init__(self, identifier, password, phone_number, name):
 		self.identifier = identifier
 		self.password = password
-		self.phoneNumber = phoneNumber
+		self.phoneNumber = phone_number
 		self.name = name
 	
-	def setIdentifier(self, identifier):
+	def set_identifier(self, identifier):
 		self.identifier = identifier
 	
-	def setPassword(self, password):
+	def set_password(self, password):
 		self.password = password
 	
-	def setPhoneNumber(self, phoneNumber):
-		self.phoneNumber = phoneNumber
+	def set_phone_number(self, phoneNumber):
+		self.phone_number = phone_number
 	
-	def setName(self, name):
+	def set_name(self, name):
 		self.name = name
 
-	def getIdentifier(self):
+	def get_identifier(self):
 		return self.identifier
 	
-	def getPassword(self):
+	def get_password(self):
 		return self.password
 
-	def getPhoneNumber(self):
-		return self.phoneNumber
+	def get_phone_number(self):
+		return self.phone_number
 
-	def getName(self):
+	def get_name(self):
 		return self.name

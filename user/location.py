@@ -1,23 +1,23 @@
 class Location:
-	def __init__(self, roadNameAddress, detailedAddress, zipCode):
-		self.roadNameAddresss = roadNameAddress
-		self.detailedAddress = detailedAddress
-		self.zipCode = zipCode
+	def __init__(self, road_name_address, detailed_address, zip_code):
+		self.road_name_addresss = road_name_address
+		self.detailed_address = detailed_address
+		self.zip_code = zip_code
 	
-	def setRoadNameAddress(self, roadNameAddress):
-		self.roadNameAddress = roadNameAddress
+	def set_road_name_address(self, road_name_address):
+		self.road_name_address = road_name_address
 
-	def setDetailedAddress(self, detailedAddress):
-		self.detailedAddress = detailedAddress
+	def set_detailed_address(self, detailed_address):
+		self.detailed_address = detailed_address
 
-	def setZipCode(self, zipCode):
-		self.zipCode = zipCode
+	def set_zip_code(self, zip_code):
+		self.zip_code = zip_code
 
-	def getRoadNameAddress(self):
-		return self.roadNameAddress
+	def get_road_name_address(self):
+		return self.road_name_address
 
-	def getDetailedAddress(self):
-		return self.detailedAddress
+	def get_detailed_address(self):
+		return self.detailed_address
 
-	def getZipcode(self):
-		return self.zipCode
+	def get_zip_code(self):
+		return self.zip_code
