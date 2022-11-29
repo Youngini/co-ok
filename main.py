@@ -5,6 +5,7 @@ import pymysql
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/main')
 def home():
     return render_template('home.html') #insert home html file path here
 
