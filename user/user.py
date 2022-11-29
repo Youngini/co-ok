@@ -11,7 +11,7 @@ class User:
 	def set_password(self, password):
 		self.password = password
 	
-	def set_phone_number(self, phoneNumber):
+	def set_phone_number(self, phone_number):
 		self.phone_number = phone_number
 	
 	def set_name(self, name):
