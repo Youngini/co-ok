@@ -1,6 +1,6 @@
 import datetime
 
-class coupon:
+class Coupon:
     def __init__(self, name, discount, experation_date):
         self.name = name
         self.discount = discount

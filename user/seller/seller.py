@@ -50,6 +50,9 @@ class Seller(User):
         
 		cursor.execute(sql)
 		result = cursor.fetchall()
+		
+		connect.commit()
+		connect.close()
         
 		return int(result[0][0])
 

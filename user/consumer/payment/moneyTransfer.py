@@ -1,23 +1,23 @@
-class moneyTransfer:
-    def __init__(self,bank_account,bank,bank_psw):
-        self.bank_account = bank_account
+class MoneyTransfer:
+    def __init__(self,account,bank,password):
+        self.account = account
         self.bank = bank
-        self.bank_psw = bank_psw
+        self.password = password
 
-    def setBankaccount(self,bank_account):
-        self.bank_account = bank_account
+    def set_account(self,account):
+        self.account = account
 
-    def setBank(self,bank):
+    def set_bank(self,bank):
         self.bank = bank
     
-    def setAccountpsw(self,bank_psw):
-        self.bank_psw = bank_psw
+    def set_password(self,password):
+        self.password = password
 
-    def getBankaccount(self):
-        return self.bank_account
+    def get_account(self):
+        return self.account
     
-    def getBank(self):
+    def get_bank(self):
         return self.bank
     
-    def getAccountpsw(self):
-        return self.bank_psw
+    def get_password(self):
+        return self.password
