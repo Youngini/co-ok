@@ -1,7 +1,4 @@
-import sys
-sys.path.append("..")
-
-from user import User
+from user.user import User
 
 class Consumer(User):
 	def __init__(self, identifier, password, phone_number, name, location, nick_name):

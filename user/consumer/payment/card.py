@@ -1,30 +1,30 @@
-class card:
-    def __init__(self,card_id,card_name,card_psw,card_cvc):
-        self.card_id = card_id
-        self.card_name = card_name
-        self.card_psw = card_psw
-        self.card_cvc = card_cvc
+class Card:
+    def __init__(self,identifier,name,password,cvc):
+        self.identifier = identifier
+        self.name = name
+        self.password = password
+        self.cvc= cvc
 
-    def setCardID(self,card_id):
-        self.card_id = card_id
+    def set_identifier(self,identifier):
+        self.identifier = identifier
     
-    def setCardname(self,card_name):
-        self.card_name = card_name
+    def set_name(self,name):
+        self.name = name
 
-    def setCardpsw(self,card_psw):
-        self.card_psw = card_psw
+    def set_password(self,password):
+        self.password = password
     
-    def setCardCVC(self,card_cvc):
-        self.card_cvc = card_cvc
+    def set_cvc(self,cvc):
+        self.cvc = cvc
 
-    def getCardID(self):
-        return self.card_id
+    def get_identifier(self):
+        return self.identifier
     
-    def getCardname(self):
-        return self.card_name
+    def get_name(self):
+        return self.name
 
-    def getCardpsw(self):
-        return self.card_psw
+    def get_password(self):
+        return self.password
     
-    def getCardCVC(self):
-        return self.card_cvc
+    def get_cvc(self):
+        return self.cvc

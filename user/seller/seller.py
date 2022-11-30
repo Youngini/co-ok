@@ -1,7 +1,5 @@
-import sys
-sys.path.append('..')
-
-from user import User
+import pymysql
+from user.user import User
 
 class Seller(User):
 	def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration):
@@ -44,11 +42,21 @@ class Seller(User):
 		return self.business_address
 
 	def get_item_number(self):
-		#get number of item by query to sql
-		#develop soon
-		pass
+		connect = pymysql.connect(host='localhost', user='root', password='password', db='cook', charset='utf8')
+        
+		cursor = connect.cursor()
+        
+		sql = f"select count(*) from product where seller_id = '{self.identifier}'"
+        
+		cursor.execute(sql)
+		result = cursor.fetchall()
+		
+		connect.commit()
+		connect.close()
+        
+		return int(result[0][0])
 
-class Individual_seller(Seller):	
+class IndividualSeller(Seller):	
 	def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration):
 		super().__init__(identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration)
 
