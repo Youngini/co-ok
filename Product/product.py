@@ -9,16 +9,17 @@
 # 상품사진 product_pict
 # 카테고리 category
 
-import sys
+# .dbInsert() 으로 현재 객체 멤버변수 정보 mysql에 등록
+# .dbRetrieve(identifier) 으로 mysql에서 identifier에 해당하는 정보 멤버변수에 할당
+
 import pymysql
 import pandas as pd
-from datetime import date, timedelta
-
+from datetime import datetime
 
 class Product:
     # product id는 어떻게?
     def __init__(self, identifier="", product_name="", cost=1, discount_per_person=0, min_group_num=10,
-                 max_group_num=10, apply_deadline=str(date.today()), product_pict="", category="", seller_id=""):
+                 max_group_num=10, apply_deadline=str(datetime.today()), product_pict="", category="", seller_id=""):
 
         self.__identifier = identifier
         self.__product_name = product_name
@@ -35,12 +36,12 @@ class Product:
         self.cur = None  # DB 커서
         self.rs = None  # 쿼리 실행 결과
 
-    def dbInit(self):
+    def __dbInit(self):
         self.conn = pymysql.connect(
-            host='localhost', user='', password='', db='cook', charset='utf8')
+            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
         self.cur = self.conn.cursor(pymysql.cursors.DictCursor)
 
-    def dbUpdate(self):
+    def dbInsert(self):
         self.dbInit()
         # PRODUCT_ID, SELLER_ID, product_pict 어떻게?
         self.rs = self.cur.execute("""INSERT INTO product 
@@ -53,13 +54,22 @@ class Product:
         self.conn.commit()
         self.cur.close()
 
-    def dbPrintOne(self, identifier):
+    def dbRetrieve(self, identifier):
         self.dbInit()
-        self.cur.execute(
-            "SELECT * FROM product WHERE identifier = '%s';" % (identifier))
+        self.rs = self.cur.execute("select * from product where identifier = '%s'" % (identifier))
         rs = self.cur.fetchall()
-        rs = pd.DataFrame(rs)
-        print(rs)
+        rs = pd.DataFrame(rs).values
+
+        self.__identifier = rs.item(0)
+        self.__product_name = rs.item(1)
+        self.__cost = rs.item(2)
+        self.__discount_per_person = rs.item(3)
+        self.__min_group_num = rs.item(4)
+        self.__max_group_num = rs.item(5)
+        self.__apply_deadline = rs.item(6)
+        #self.__product_pict = product_pict
+        self.__category = rs.item(7)
+        self.__seller_id = rs.item(8)
 
     def setIdentifier(self, identifier):
         self.__identifier = identifier
@@ -123,7 +133,17 @@ class Product:
 
     def getSeller_id(self):
         return self.__seller_id
-
+    
+    def print(self):
+        print(self.__identifier)
+        print(self.__product_name)
+        print(self.__cost)
+        print(self.__discount_per_person)
+        print(self.__min_group_num)
+        print(self.__max_group_num)
+        print(self.__apply_deadline)
+        print(self.__category)
+        print(self.__seller_id)
         #  def getDiscounted(self):
         # def setDetailed_info(self, )
         # def getMaxprice(self)
@@ -132,19 +152,6 @@ class Product:
         # 최소가격이 원가의 50%이하일때 판매자한테 경고
         # 할인공식:(100-인당할인률)/100 ** 구매인ㅇ
 
-
-# identifier = input("product id: ")
-# pname = input("pname: ")
-# cost = int(input("cost: "))
-# dpp = int(input("discount_per_person: "))
-# mingn = int(input("mingn: "))
-# maxgn = int(input("maxgn: "))
-# ad = input("apply_deadline: ")
-# pict = input("product_pict: ")
-# cate = input("category: ")
-# seller_id = input("seller_id: ")
-
-Pro = Product()
-Pro.dbInit()
-# Pro.dbUpdate()
-Pro.dbPrintOne('1234')
+pro = Product()
+pro.dbRetrieve('1234')
+pro.print()
