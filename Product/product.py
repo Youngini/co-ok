@@ -42,7 +42,7 @@ class Product:
         self.cur = self.conn.cursor(pymysql.cursors.DictCursor)
 
     def dbInsert(self):
-        self.dbInit()
+        self.__dbInit()
         # PRODUCT_ID, SELLER_ID, product_pict 어떻게?
         self.rs = self.cur.execute("""INSERT INTO product 
                                    VALUES('%s', '%s', '%d', '%d', '%d',
@@ -55,7 +55,7 @@ class Product:
         self.cur.close()
 
     def dbRetrieve(self, identifier):
-        self.dbInit()
+        self.__dbInit()
         self.rs = self.cur.execute("select * from product where identifier = '%s'" % (identifier))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
