@@ -17,7 +17,6 @@ class BuyGroup:
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
-        self.rs = None  # 쿼리 실행 결과
 
     def __dbInit(self):
         self.conn = pymysql.connect(
@@ -26,7 +25,7 @@ class BuyGroup:
 
     def dbInsert(self):
         self.__dbInit()
-        self.rs = self.cur.execute("""INSERT INTO buygroup
+        self.cur.execute("""INSERT INTO buygroup
                                    VALUES('%s', '%s', '%d', '%s', '%d');
                                    """
                                    % (self.__identifier, self.__name, self.__limit_number, self.__product_id, self.__dicounted_price))
@@ -35,7 +34,7 @@ class BuyGroup:
 
     def dbRetrieve(self, identifier):
         self.__dbInit()
-        self.rs = self.cur.execute("""select * from buygroup where identifier='%s'
+        rs = self.cur.execute("""select * from buygroup where identifier='%s'
                                    """ % (identifier))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
@@ -53,32 +52,39 @@ class BuyGroup:
         print(self.__product_id)
         print(self.__dicounted_price)
 
-    def setGroupName(self, group_name):
-        self.group_name = group_name
+    def set_group_name(self, group_name):
+        self.__group_name = group_name
 
-    def setGroupLimit(self, pgroup_number):
-        self.group_limit = pgroup_number
+    def set_group_limit(self, pgroup_number):
+        self.__group_limit = pgroup_number
 
-    def setPGroupNumber(self, pgroup_number):
-        self.pgroup_number = pgroup_number
+    def set_pgroup_number(self, pgroup_number):
+        self.__pgroup_number = pgroup_number
 
-    def setPGroupProductNumber(self, pgroup_product_number):
-        self.pgroup_product_number = pgroup_product_number
+    def set_pgroup_product_number(self, pgroup_product_number):
+        self.__pgroup_product_number = pgroup_product_number
 
-    def setDiscountPrice(self, discount_price):
-        self.discount_price = discount_price
+    def set_discount_price(self, discount_price):
+        self.__discount_price = discount_price
 
-    def getGroupName(self):
-        return self.group_name
+    def get_group_name(self):
+        return self.__group_name
 
-    def getGroupLimit(self):
-        return self.group_limit
+    def get_group_limit(self):
+        return self.__group_limit
 
-    def getPGroupNumber(self):
-        return self.pgroup_number
+    def get_prgroup_number(self):
+        return self.__pgroup_number
 
-    def getPGroupProductNumber(self):
-        return self.pgroup_product_number
+    def get_pgroup_product_number(self):
+        return self.__pgroup_product_number
 
-    def getDiscountPrice(self):
-        return self.discount_price
+    def get_discount_price(self):
+        return self.__discount_price
+    
+    def print(self):
+        print(self.__group_name)
+        print(self.__group_limit)
+        print(self.__pgroup_number)
+        print(self.__pgroup_product_number)
+        print(self.__discount_price)

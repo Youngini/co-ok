@@ -15,7 +15,6 @@ class Exchange:
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
-        self.rs = None  # 쿼리 실행 결과
 
     def __dbInit(self):
         self.conn = pymysql.connect(
@@ -24,7 +23,7 @@ class Exchange:
 
     def dbInsert(self):
         self.__dbInit()
-        self.rs = self.cur.execute("""INSERT INTO Exchange
+        self.cur.execute("""INSERT INTO Exchange
                                    VALUES('%s', '%s', '%s');
                                    """
                                    % (self.__reason, self.__order_date, self.__order_id))
@@ -33,7 +32,7 @@ class Exchange:
 
     def dbRetrieve(self, order_id):
         self.__dbInit()
-        self.rs = self.cur.execute("""select * from Exchange where order_id='%s'
+        rs = self.cur.execute("""select * from Exchange where order_id='%s'
                                    """ % (order_id))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values

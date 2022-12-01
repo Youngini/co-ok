@@ -34,7 +34,6 @@ class Product:
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
-        self.rs = None  # 쿼리 실행 결과
 
     def __dbInit(self):
         self.conn = pymysql.connect(
@@ -44,7 +43,7 @@ class Product:
     def dbInsert(self):
         self.__dbInit()
         # PRODUCT_ID, SELLER_ID, product_pict 어떻게?
-        self.rs = self.cur.execute("""INSERT INTO product 
+        self.cur.execute("""INSERT INTO product 
                                    VALUES('%s', '%s', '%d', '%d', '%d',
                                           '%d', '%s', '%s', '%s');
                                    """

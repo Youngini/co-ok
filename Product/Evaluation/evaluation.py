@@ -19,7 +19,6 @@ class Evaluation:
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
-        self.rs = None  # 쿼리 실행 결과
 
     def __dbInit(self):
         self.conn = pymysql.connect(
@@ -28,7 +27,7 @@ class Evaluation:
 
     def dbInsert(self):
         self.__dbInit()
-        self.rs = self.cur.execute("""INSERT INTO evaluation
+        self.cur.execute("""INSERT INTO evaluation
                                    VALUES('%d', '%s', '%s', '%s');
                                    """
                                    % (self.__score, self.__detailed_eval, self.__product_id, self.__consumer_id,))
@@ -37,7 +36,7 @@ class Evaluation:
 
     def dbRetrieve(self, product_id, consumer_id):
         self.__dbInit()
-        self.rs = self.cur.execute("""select * from evaluation where product_id='%s' and consumer_id='%s'
+        rs = self.cur.execute("""select * from evaluation where product_id='%s' and consumer_id='%s'
                                    """ % (product_id, consumer_id))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
