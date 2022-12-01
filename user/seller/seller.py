@@ -1,6 +1,6 @@
 import pymysql
 import pandas as pd
-from user.user import User
+from User.user import User
 
 
 class Seller(User):

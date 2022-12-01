@@ -1,5 +1,5 @@
-from user.user import User
-from user.location import Location
+from User.user import User
+from User.location import Location
 import pymysql
 import pandas as pd
 
