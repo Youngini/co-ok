@@ -17,6 +17,9 @@ class Ordering:
 		self.__group_id = group_id
 		self._consumer_id = consumer_id
 
+		self.conn = None
+		self.cur = None
+
 	def __dbInit(self):
 		self.conn = pymysql.connect(
             host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
@@ -24,7 +27,7 @@ class Ordering:
 
 	def dbInsert(self):
 		self.__dbInit()
-		self.rs = self.cur.execute("""INSERT INTO Ordering
+		self.cur.execute("""INSERT INTO Ordering
                                    VALUES('%s', '%s', '%d', '%d', '%s', '%s');
                                    """
                                    % (self.__identifier, self.__order_date, self.__product_number,
@@ -34,7 +37,7 @@ class Ordering:
 
 	def dbRetrieve(self, group_id, consumer_id):
 		self.__dbInit()
-		self.rs = self.cur.execute("""select * from Ordering where group_id='%s', consumer_id='%s';
+		rs = self.cur.execute("""select * from Ordering where group_id='%s', consumer_id='%s';
                                    """ % (group_id, consumer_id))
 		rs = self.cur.fetchall()
 		rs = pd.DataFrame(rs).values
@@ -46,29 +49,29 @@ class Ordering:
 		self.__group_id = rs.item(4)
 		self.__consumer_id = rs.item(5)
 
-	def setOrderNumber(self, order_number):
-		self.order_number = order_number
+	def set_order_number(self, order_number):
+		self.__order_number = order_number
 
-	def setOrderDate(self, order_date):
-		self.order_date = order_date
+	def set_order_date(self, order_date):
+		self.__order_date = order_date
 
-	def setProductNumber(self, product_number):
-		self.product_number = product_number
+	def set_product_number(self, product_number):
+		self.__product_number = product_number
 
-	def setDiscountPrice(self, discount_price):
-		self.discount_price = discount_price
+	def set_discount_price(self, discount_price):
+		self.__discount_price = discount_price
 
-	def getOrderNumber(self):
-		return self.order_number
+	def get_order_number(self):
+		return self.__order_number
 
-	def getOrderDate(self):
-		return self.order_date
+	def get_order_date(self):
+		return self.__order_date
 
-	def getProductNumber(self):
-		return self.product_number
+	def get_product_number(self):
+		return self.__product_number
 
-	def getDiscountPrice(self):
-		return self.discount_price
+	def get_discount_price(self):
+		return self.__discount_price
 
 	def print(self):
 		print(self.__identifier)
