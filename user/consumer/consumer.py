@@ -1,8 +1,14 @@
-from user.user import User
-from user.location import Location
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))))
+
+from user import User
+from location import Location
+from Order.BuyGroup import BuyGroup
+from Product.product import Product
+from Order.Ordering import Ordering
 import pymysql
 import pandas as pd
-
 
 class Consumer(User):
     def __init__(self, identifier="", password="", phone_number="", name="", location=Location(), nick_name=""):
@@ -23,7 +29,7 @@ class Consumer(User):
         self.cur.execute("""INSERT INTO consumer 
                                    VALUES('%s', '%s', '%s', '%s', '%s', '%s');
                                    """
-                              % (self.__identifier, self.__password, self.__phone_number, self.__name,
+                              % (self.identifier, self.password, self.phone_number, self.name,
                                  self.__location, self.__nick_name))
         self.conn.commit()
         self.cur.close()
@@ -61,3 +67,10 @@ class Consumer(User):
         print(self.__name)
         print(self.__location)
         print(self.__nick_name)
+
+# consumer = Consumer('3456','bbbbb','01022222222','consumer','somewhere','monekey')
+# consumer.dbInsert()
+
+pro = Product()
+pro.dbRetrieve('1234')
+pro.get_group_list()

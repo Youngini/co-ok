@@ -1,7 +1,8 @@
 import pymysql
 import pandas as pd
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from user.user import User
-
 
 class Seller(User):
     def __init__(self, identifier="", password="", phone_number="", name="", business_name="", email_address="", seller_account="",
@@ -29,10 +30,10 @@ class Seller(User):
                                    VALUES('%s', '%s', '%s', '%s', '%s',
                                           '%s', '%s', '%s', '%s', '%s', '%s');
                                    """
-                                   % (self.__identifier, self.__password, self.__phone_number, self.__name,
+                                   % (self.identifier, self.password, self.phone_number, self.name,
                                       self.__business_address, self.__email_address, self.__seller_account,
                                       self.__telephone_number, self.__business_address, self.__teleselling_registration,
-                                      self.__teleselling_registration, self.__buisiness_registration))
+                                       self.__buisiness_registration))
         self.conn.commit()
         self.cur.close()
 
@@ -132,3 +133,7 @@ class CorporateSeller(Seller):
         super().__init__(identifier, password, phone_number, name, business_name, email_address,
                          seller_account, telephone_number, business_address, teleselling_registration)
         self.__business_registration = business_registration
+
+seller = Seller('2345', 'aaaaa', '01011111111', 'hongs', 'cop','asd@sf.sdf',
+                'afds','01012341234','home','home somewhere','cop somewhere')
+seller.dbInsert()

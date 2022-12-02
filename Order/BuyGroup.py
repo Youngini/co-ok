@@ -2,10 +2,10 @@
 # 모임정원 limit_number
 # 상품id product_id
 # 할인 가격 discount_price
-
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import pymysql
 import pandas as pd
-
 
 class BuyGroup:
     def __init__(self, identifier="", name="", limit_number=30, product_id="", dicounted_price=0):
@@ -44,6 +44,9 @@ class BuyGroup:
         self.__limit_number = rs.item(2)
         self.__product_id = rs.item(3)
         self.__dicounted_price = rs.item(4)
+
+    def join_group(self, identifier):
+        self.dbRetrieve(identifier)
 
     def print(self):
         print(self.__identifier)
@@ -88,3 +91,10 @@ class BuyGroup:
         print(self.__pgroup_number)
         print(self.__pgroup_product_number)
         print(self.__discount_price)
+
+#buygroup = BuyGroup('4567', 'group1',45,'1234',20)
+#buygroup = BuyGroup('5678','group2',46,'1234',30)
+#buygroup.dbInsert()
+buygroup = BuyGroup()
+buygroup.dbRetrieve('4567')
+buygroup.join_group('4567')

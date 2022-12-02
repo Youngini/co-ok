@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # 상품명 product_name
 # 원가 cost
 # 인당 할인율 discount_per_person
@@ -15,11 +13,14 @@
 import pymysql
 import pandas as pd
 from datetime import datetime
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+# from Order.BuyGroup import BuyGroup
 
 class Product:
     # product id는 어떻게?
     def __init__(self, identifier="", product_name="", cost=1, discount_per_person=0, min_group_num=10,
-                 max_group_num=10, apply_deadline=str(datetime.today()), product_pict="", category="", seller_id=""):
+                 max_group_num=10, apply_deadline=str(datetime.today()), category="", seller_id=""):
 
         self.__identifier = identifier
         self.__product_name = product_name
@@ -69,7 +70,42 @@ class Product:
         #self.__product_pict = product_pict
         self.__category = rs.item(7)
         self.__seller_id = rs.item(8)
+        
 
+    def __check_product_number(self):
+        self.__dbInit()
+        self.cur.execute("select count(*) from product where seller_id = '%s'" % (self.__seller_id))
+        rs = self.cur.fetchall()
+        rs = pd.DataFrame(rs).values
+
+        print("product number of '%s' is  '%d'" % (self.__seller_id, rs.item(0)))
+        if rs.item(0) <= 30:
+            return True
+        else:
+            return False
+
+    def assign_product(self):
+        if not self.__check_product_number():
+            print('product number over')
+            return False
+        
+        self.dbInsert()
+        print('product assign')
+        return True
+
+    def get_group_list(self):
+        self.__dbInit()
+        self.cur.execute("select * from buygroup where product_id = '%s'" % (self.__identifier))
+        rs=self.cur.fetchall()
+        rs = pd.DataFrame(rs)
+
+        if  len(rs)== 0:
+            print("no groups")
+            return 
+        for group in rs.values:
+            print(group)
+        return rs
+        
     def setIdentifier(self, identifier):
         self.__identifier = identifier
 
@@ -151,6 +187,8 @@ class Product:
         # 최소가격이 원가의 50%이하일때 판매자한테 경고
         # 할인공식:(100-인당할인률)/100 ** 구매인ㅇ
 
-pro = Product()
-pro.dbRetrieve('1234')
-pro.print()
+#pro = Product('1234','hongs',30,20,10,12,'2022-11-29','drinks','2345')
+#pro.assign_product()
+# pro = Product()
+# pro.dbRetrieve('1234')
+# pro.get_group_list()
