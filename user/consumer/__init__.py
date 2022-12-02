@@ -1,2 +1,2 @@
 #__init__.py
-import consumer, coupon
+from user.consumer import consumer, coupon

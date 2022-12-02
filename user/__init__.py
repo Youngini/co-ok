@@ -1,2 +1,2 @@
 #__init__.py
-import contact, location, user
+from user import contact, location, user

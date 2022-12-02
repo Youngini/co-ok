@@ -1,5 +1,5 @@
-from User.user import User
-from User.location import Location
+from user.user import User
+from user.location import Location
 import pymysql
 import pandas as pd
 
@@ -34,13 +34,33 @@ class Consumer(User):
             "select * from consumer where identifier = '%s'" % (identifier))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
-
+        
+        if len(rs) == 0:
+            return False
+        
         self.__identifier = rs.item(0)
         self.__password = rs.item(1)
         self.__phone_number = rs.item(2)
         self.__name = rs.item(3)
         self.__location = rs.item(4)
         self.__nick_name = rs.item(5)
+        
+        return True
+        
+    def dbLogin(self, identifier, password):
+        self.__dbInit()
+        rs = self.cur.execute(
+            "select * from consumer where identifier = '%s'" % (identifier))
+        rs = self.cur.fetchall()
+        rs = pd.DataFrame(rs).values
+        
+        if len(rs) == 0:
+            return False
+        if rs.item(1) != password:
+            return False
+        if rs.item(1) == password:
+            self.dbRetrieve(identifier)
+            return True
 
     def set_location(self, location):
         self.__location = location

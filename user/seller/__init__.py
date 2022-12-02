@@ -1,2 +1,2 @@
 #__init__.py
-import seller
+from user.seller import seller

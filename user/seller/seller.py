@@ -1,6 +1,6 @@
 import pymysql
 import pandas as pd
-from User.user import User
+from user.user import User
 
 
 class Seller(User):
@@ -101,7 +101,7 @@ class Seller(User):
         self.cur.execute(rs)
         rs = self.cur.fetchall()
 
-        result = pd.DataFrame(result)
+        result = pd.DataFrame(rs)
         self.conn.commit()
         self.conn.close()
 
