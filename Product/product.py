@@ -40,8 +40,13 @@ class Product:
             host='localhost', user='', password='', db='cook', charset='utf8')
         self.cur = self.conn.cursor(pymysql.cursors.DictCursor)
 
+<<<<<<< HEAD
     def dbUpdate(self):
         self.dbInit()
+=======
+    def dbInsert(self):
+        self.__dbInit()
+>>>>>>> 9c61274ebd0d46a86f7c2f1c53c205611dab657d
         # PRODUCT_ID, SELLER_ID, product_pict 어떻게?
         self.rs = self.cur.execute("""INSERT INTO product 
                                    VALUES('%s', '%s', '%d', '%d', '%d',
@@ -53,10 +58,16 @@ class Product:
         self.conn.commit()
         self.cur.close()
 
+<<<<<<< HEAD
     def dbPrintOne(self, identifier):
         self.dbInit()
         self.cur.execute(
             "SELECT * FROM product WHERE identifier = '%s';" % (identifier))
+=======
+    def dbRetrieve(self, identifier):
+        self.__dbInit()
+        self.rs = self.cur.execute("select * from product where identifier = '%s'" % (identifier))
+>>>>>>> 9c61274ebd0d46a86f7c2f1c53c205611dab657d
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs)
         print(rs)
