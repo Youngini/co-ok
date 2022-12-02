@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+*{margin:0; padding: 0;}
+html, body{
+    margin: 0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.menu-bar{
+    padding-right: 50px;
+    padding-top: 20px;
+}
+.menu-bar a{
+    display: inline-block;
+    font-size: 15px; color: #999;
+    padding:10px;
+}
+
+.menu-bar a div{
+    display: inline-block;
+}
+
+
+a{
+    text-decoration: none;
+}
+a{
+    font-size: 15px; color: #999;
+    text-decoration: none; 
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+a:focus{
+    text-decoration: none;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+}
