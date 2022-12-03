@@ -8,12 +8,12 @@ import pymysql
 import pandas as pd
 
 class BuyGroup:
-    def __init__(self, identifier="", name="", limit_number=30, product_id="", dicounted_price=0):
+    def __init__(self, identifier="", name="", limit_number=30, product_id=""):
         self.__identifier = identifier
         self.__name = name
         self.__limit_number = limit_number
         self.__product_id = product_id
-        self.__dicounted_price = dicounted_price
+        self.__dicounted_price = self.make_discounted_price()
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
@@ -45,8 +45,22 @@ class BuyGroup:
         self.__product_id = rs.item(3)
         self.__dicounted_price = rs.item(4)
 
-    def join_group(self, identifier):
-        self.dbRetrieve(identifier)
+    def make_discounted_price(self):
+        self.__dbInit()
+        self.cur.execute("select cost, discount_per_person from product where identifier='%s'" % 
+                        (self.__product_id))
+        rs = self.cur.fetchall()
+        rs=pd.DataFrame(rs).values
+
+        origin_price = rs.item(0)
+        discount_rate = rs.item(1)
+        group_member_number = self.__limit_number
+
+        discounted_cost = origin_price * ((100-discount_rate)/100)**group_member_number ## 이 부분 맞는지 확인 부탁드립니다
+
+        print(discounted_cost)
+
+        return discounted_cost
 
     def print(self):
         print(self.__identifier)
@@ -55,46 +69,40 @@ class BuyGroup:
         print(self.__product_id)
         print(self.__dicounted_price)
 
-    def set_group_name(self, group_name):
-        self.__group_name = group_name
+    def set_identifier(self, identifier):
+        self.__identifier = identifier
 
-    def set_group_limit(self, pgroup_number):
-        self.__group_limit = pgroup_number
+    def set_name(self, name):
+        self.__name = name
 
-    def set_pgroup_number(self, pgroup_number):
-        self.__pgroup_number = pgroup_number
+    def set_limit_number(self, limit_number):
+        self.__limit_number = limit_number
 
-    def set_pgroup_product_number(self, pgroup_product_number):
-        self.__pgroup_product_number = pgroup_product_number
+    def set_product_id(self, product_id):
+        self.__product_id = product_id
 
-    def set_discount_price(self, discount_price):
-        self.__discount_price = discount_price
+    def set_discounted_price(self, discounted_price):
+        self.__dicounted_price = discounted_price
 
-    def get_group_name(self):
-        return self.__group_name
+    def get_identifier(self):
+        return self.__identifier
 
-    def get_group_limit(self):
-        return self.__group_limit
+    def get_name(self):
+        return self.__name
 
-    def get_prgroup_number(self):
-        return self.__pgroup_number
+    def get_limit_number(self):
+        return self.__limit_number
 
-    def get_pgroup_product_number(self):
-        return self.__pgroup_product_number
+    def get_product_id(self):
+        return self.__product_id
 
-    def get_discount_price(self):
-        return self.__discount_price
+    def get_discounted_price(self):
+        return self.__dicounted_price
     
-    def print(self):
-        print(self.__group_name)
-        print(self.__group_limit)
-        print(self.__pgroup_number)
-        print(self.__pgroup_product_number)
-        print(self.__discount_price)
-
 #buygroup = BuyGroup('4567', 'group1',45,'1234',20)
-#buygroup = BuyGroup('5678','group2',46,'1234',30)
-#buygroup.dbInsert()
-buygroup = BuyGroup()
-buygroup.dbRetrieve('4567')
-buygroup.join_group('4567')
+buygroup = BuyGroup('5678','group2',46,'1234')
+buygroup.dbInsert()
+buygroup.dbRetrieve('5678')
+buygroup.print()
+# buygroup = BuyGroup()
+# buygroup.dbRetrieve('4567')
