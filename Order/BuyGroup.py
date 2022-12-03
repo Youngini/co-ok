@@ -100,9 +100,9 @@ class BuyGroup:
         return self.__dicounted_price
     
 #buygroup = BuyGroup('4567', 'group1',45,'1234',20)
-buygroup = BuyGroup('5678','group2',46,'1234')
-buygroup.dbInsert()
-buygroup.dbRetrieve('5678')
-buygroup.print()
+#buygroup = BuyGroup('5678','group2',46,'1234')
+#buygroup.dbInsert()
+#buygroup.dbRetrieve('5678')
+#buygroup.print()
 # buygroup = BuyGroup()
 # buygroup.dbRetrieve('4567')

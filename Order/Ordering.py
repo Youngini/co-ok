@@ -6,7 +6,7 @@
 import pymysql
 import pandas as pd
 from datetime import datetime
-from BuyGroup import BuyGroup
+from Order.BuyGroup import BuyGroup
 
 
 class Ordering:
@@ -103,5 +103,5 @@ class Ordering:
         print(self.__consumer_id)
 
 
-order = Ordering('6789', '2022-12-03', '1234', 30, '4567', '3456')
-order.make_order('4567', '3456')
+#order = Ordering('6789', '2022-12-03', '1234', 30, '4567', '3456')
+#order.make_order('4567', '3456')

@@ -64,6 +64,6 @@ class Evaluation:
         print(self.__product_id)
         print(self.__consumer_id)
     
-eva = Evaluation()
-eva.dbRetrieve('1234','66668')
-eva.print()
+#eva = Evaluation()
+#eva.dbRetrieve('1234','66668')
+#eva.print()

@@ -1,9 +1,9 @@
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))))
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))))
 
-from user import User
-from location import Location
+from user.user import User
+from user.location import Location
 from Order.BuyGroup import BuyGroup
 from Product.product import Product
 from Order.Ordering import Ordering
@@ -47,6 +47,19 @@ class Consumer(User):
         self.__name = rs.item(3)
         self.__location = rs.item(4)
         self.__nick_name = rs.item(5)
+        
+    def dbLogin(self, identifier, password):
+        self.__dbInit()
+        rs = self.cur.execute("""select * from consumer where identifier='%s'
+                                   """ % (identifier))
+        rs = self.cur.fetchall()
+        rs = pd.DataFrame(rs).values
+		
+        if len(rs) > 0 and rs.item(1) == password:
+            self.dbRetrieve(identifier)
+            return True
+        else:
+            return False
 
     def set_location(self, location):
         self.__location = location
@@ -71,6 +84,6 @@ class Consumer(User):
 # consumer = Consumer('3456','bbbbb','01022222222','consumer','somewhere','monekey')
 # consumer.dbInsert()
 
-pro = Product()
-pro.dbRetrieve('1234')
-pro.get_group_list()
+#pro = Product()
+#pro.dbRetrieve('1234')
+#pro.get_group_list()

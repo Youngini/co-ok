@@ -1,7 +1,7 @@
 import pymysql
 import pandas as pd
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from user.user import User
 
 class Seller(User):
@@ -55,6 +55,19 @@ class Seller(User):
         self.__business_address = rs.item(8)
         self.__teleselling_registration = rs.item(9)
         self.__buisiness_registration = rs.item(10)
+		
+    def dbLogin(self, identifier, password):
+        self.__dbInit()
+        rs = self.cur.execute("""select * from seller where identifier='%s'
+                                   """ % (identifier))
+        rs = self.cur.fetchall()
+        rs = pd.DataFrame(rs).values
+		
+        if len(rs) > 0 and rs.item(1) == password:
+            self.dbRetrieve(identifier)
+            return True
+        else:
+            return False
 
     def set_business_name(self, business_name):
         self.__business_name = business_name
@@ -102,7 +115,7 @@ class Seller(User):
         self.cur.execute(rs)
         rs = self.cur.fetchall()
 
-        result = pd.DataFrame(result)
+        result = pd.DataFrame(rs)
         self.conn.commit()
         self.conn.close()
 
@@ -123,17 +136,18 @@ class Seller(User):
 
 
 class IndividualSeller(Seller):
-    def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration):
+    def __init__(self, identifier="", password="", phone_number="", name="", business_name="", email_address="", seller_account="",
+                 telephone_number="", business_address="", teleselling_registration="", buisiness_registration=""):
         super().__init__(identifier, password, phone_number, name, business_name, email_address,
-                         seller_account, telephone_number, business_address, teleselling_registration)
+                         seller_account, telephone_number, business_address, teleselling_registration, business_registration)
 
 
 class CorporateSeller(Seller):
-    def __init__(self, identifier, password, phone_number, name, business_name, email_address, seller_account, telephone_number, business_address, teleselling_registration, business_registration):
+    def __init__(self, identifier="", password="", phone_number="", name="", business_name="", email_address="", seller_account="",
+                 telephone_number="", business_address="", teleselling_registration="", business_registration=""):
         super().__init__(identifier, password, phone_number, name, business_name, email_address,
-                         seller_account, telephone_number, business_address, teleselling_registration)
-        self.__business_registration = business_registration
+                         seller_account, telephone_number, business_address, teleselling_registration, business_registration)
 
-seller = Seller('2345', 'aaaaa', '01011111111', 'hongs', 'cop','asd@sf.sdf',
-                'afds','01012341234','home','home somewhere','cop somewhere')
-seller.dbInsert()
+#seller = Seller('2345', 'aaaaa', '01011111111', 'hongs', 'cop','asd@sf.sdf',
+                #'afds','01012341234','home','home somewhere','cop somewhere')
+#seller.dbInsert()
