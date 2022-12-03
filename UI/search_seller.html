@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CO-OK 식품 검색</title>
+    <link rel="stylesheet" href = "search.css">
+    <script src="jquery-3.4.1js"></script>
+</head>
+<header>
+    <div class = "logo">
+        <a href="main_seller.html"> <img src = "smallLogo.png"; width="175px"></a>
+        <div>식품 검색</div>
+    </div>
+    <div class = "menu-bar">
+        <a href = "">판매자 <div id = "nickname"></div></a>
+        <a href="mypage_seller.css">마이 페이지</a>
+        <a href="main.html">로그아웃</a> 
+    </div>
+</header>   
+
+<body>
+    
+    <div class="search:" style="text-align: left;">
+        <input type="text" placeholder="츄르">
+        <button class="btn_search" type="submit"><img src="btn_search.png" height="15"></button>
+    </div>
+    
+        <details>
+        <summary>카테고리</summary>
+        <div class = "category">가공식품</div>
+        <div class = "category">곡류</div>
+        <div class = "category">과일</div>
+        <div class = "category">육류</div>
+        <div class = "category">수산물</div>
+        <div class = "category">채소</div>
+        <div class = "category">조미료</div>
+        <div class = "category">스낵</div>
+        <div class = "category">음료</div>
+    </details>
+
+    <select name = "sort">
+        <option value = "정렬 순">정렬 순</option>
+        <option value = "주문 많은 순">주문 많은 순</div>
+        <option value = "가격 낮은 순">가격 낮은 순</div>
+        <option value = "가격 높은 순">가격 높은 순</div>
+        <option value = "리뷰 많은 순">리뷰 많은 순</div>
+    </select>
+    
+    <div id="product_list" style="overflow:auto; ">
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>6,000 ~ 10,000원</i>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>6,000 ~ 10,000원</i>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>6,000 ~ 10,000원</i>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>6,500 ~ 10,000원</i>
+            </div>
+        </div>
+        
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>5,990 ~ 12,000원</i>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>6,590 ~ 11,000원</i>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src = "chu.png" width="100" height="100">
+            <p>츄르/</p>
+            <div class="product_name" style="font-weight: bold;">
+                고양이 츄르
+            </div>
+            <div class="price">
+                <i>7,000 ~ 12,900원</i>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var nickname = "민주";
+    document.getElementById("nickname").innerHTML = nickname;
+</script>
+
+</html>

@@ -13,10 +13,82 @@
     </div>
     <div class = "menu-bar">
         <a href = "">소비자 <div id = "nickname"></div></a>
-        <a href="">마이 페이지</a>
-        <a href="">로그아웃</a> 
+        <a href="mypage_customer.html">마이 페이지</a>
+        <a href="login.html">로그아웃</a> 
     </div>
 </header>
+
+<body>
+    <div class="search:" style="text-align: left;">
+        <input type="text" placeholder="츄르">
+        <button class="btn_search" type="submit"><img src="btn_search.png" height="15"></button>
+    </div>
+
+    <details>
+        <summary>카테고리</summary>
+        <div class = "category">가공식품</div>
+        <div class = "category">곡류</div>
+        <div class = "category">과일</div>
+        <div class = "category">육류</div>
+        <div class = "category">수산물</div>
+        <div class = "category">채소</div>
+        <div class = "category">조미료</div>
+        <div class = "category">스낵</div>
+        <div class = "category">음료</div>
+    </details>
+
+    <select name = "sort">
+        <option value = "정렬 순">정렬 순</option>
+        <option value = "주문 많은 순">주문 많은 순</option>
+        <option value = "가격 낮은 순">가격 낮은 순</option>
+        <option value = "가격 높은 순">가격 높은 순</option>
+        <option value = "리뷰 많은 순">리뷰 많은 순</option>
+    </select>   
+
+    <div class = "group_list">
+
+        <table border="1" width = "1300">
+            <th>모임 사진</th>
+            <th>모임 이름</th>
+            <th>가격</th>
+            <th>모임 인원</th>
+            <th>남은 일 수</th>
+            <tr>
+               
+                <td><img src = "group.png" width="100" height="100" align="center"></td>
+                <td><div class="name"><a href = "">도깡이 귀여워 모임</a></div></td>
+                <td><div class="price"><i>1,200원</i></div></td>
+                <td><div class="num">48/50</div></td>
+                <td><div class="day">D-3</div></td>
+            <tr>
+                <td><img src = "group.png" width="100" height="100" align="center"></td>
+                <td><div class="name">메추리 귀여워 모임</div></td>
+                <td><div class="price"><i>1,200원</i></div></td>
+                <td><div class="num">48/50</div></td>
+                <td><div class="day">D-3</div></td>
+            <tr>
+                <td><img src = "group.png" width="100" height="100" align="center"></td>
+                <td><div class="name">츄르 공동구매</div></td>
+                <td><div class="price"><i>1,200원</i></div></td>
+                <td><div class="num">48/50</div></td>
+                <td><div class="day">D-3</div></td>
+            <tr>
+                <td><img src = "group.png" width="100" height="100" align="center"></td>
+                <td><div class="name">츄르 모임</div></td>
+                <td><div class="price"><i>1,200원</i></div></td>
+                <td><div class="num">48/50</div></td>
+                <td><div class="day">D-3</div></td>
+            <tr>
+                <td><img src = "group.png" width="100" height="100" align="center"></td>
+                <td><div class="name">츄르 사자</div></td>
+                <td><div class="price"><i>1,200원</i></div></td>
+                <td><div class="num">48/50</div></td>
+                <td><div class="day">D-3</div></td>
+            </table>
+
+    </div>
+
+</body>
 
 <script>
     var nickname = "도깡이";
@@ -24,4 +96,3 @@
 </script>
 
 </html>
-

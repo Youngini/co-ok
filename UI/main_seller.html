@@ -5,18 +5,27 @@
     <meta charset="UTF-8">
     <title>CO-OK</title>
     <link rel="stylesheet" href = "main.css">
+    <script src="jquery-3.4.1js"></script>
 </head>
 
 <header>
     <div class = "menu-bar"style="text-align:right;">
-        <a href = "login.html">로그인<div id = "nickname"></div></a>
+        <a href = "">판매자 <div id = "nickname"></div></a>
+        <a href="mypage_seller.html">마이 페이지</a>
+        <a href="main.html">로그아웃</a> 
     </div>
 </header>
 
+<script>
+    var nickname = "민주";
+    document.getElementById("nickname").innerHTML = nickname;
+</script>
+
 <body>
 
-    <div style = "text-align: center;">
+    <div class = "logo:" style = "text-align: center;">
         <img src="Logo.png" height = "375px">
+        
     </div>
 
     <div class="search:" style="text-align: center;">
@@ -40,4 +49,6 @@
     </div>
 
 </body>
+
+
 </html>
