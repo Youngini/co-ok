@@ -132,6 +132,7 @@ header{
 
 .pop_inner .con{
     padding: 50px 100px; border-bottom: 1px solid #999;
+    font-size: 18px;
 }
 
 table.type1 th{ font-size: 13px; color: #222; text-align: left; font-weight: normal;}
