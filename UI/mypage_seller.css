@@ -19,41 +19,157 @@ header{
     margin-left: 50px;
 }
 
-.menu-bar{
+.menu-bar {
     float: right;
     padding-right: 50px;
     padding-top: 20px;
 }
-.menu-bar a{
+.menu-bar a {
     display: inline-block;
     font-size: 15px; color: #999;
-    padding:10px;
+    padding: 10px;
 }
 
-.menu-bar a div{
+.menu-bar a div {
     display: inline-block;
+}
+
+.menu-left{
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+.vertical-menu{
+    width: 200px;
+    overflow: hidden;
+    margin: 150px auto;
+}
+
+.vertical-menu li{
+    font-size: 18px;
+    text-align: center;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid #999;
+}
+
+.content{
+    float: right;
+    width: 70%;
+    height: 100%;
+    margin: auto;
+}
+
+.info{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 20%;
+}
+
+.info div{
+    float: left;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.content_upper{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+.open
+{
+    font-weight:bold;
+    margin:5px; 
+    padding:4px 6px; 
+}
+.pop_wrap
+{
+    position:fixed; 
+    top:0; left:0; right:0; bottom:0; 
+    background:rgba(0,0,0,.5); 
+    font-size:0; text-align:center;
+}
+.pop_wrap:after
+{
+    display:inline-block; 
+    height:100%; 
+    vertical-align:middle; 
+    content:'';
+}
+.pop_wrap .pop_inner
+{
+    display:inline-block; 
+    padding:20px 30px; 
+    background:white; 
+    vertical-align:middle; 
+    font-size:15px;
+}
+
+.pop_inner
+{
+    position: fixed; left: 50%; top: 50%; padding: 0 60px;
+    width: 820px; height: 833px;
+    transform: translate(-50%, -50%); border: 1px solid black; 
+    opacity: 1;
+    box-sizing: border-box;
+}
+
+.pop_inner h2{
+    padding: 30px 0 42px; font-weight: bold;
+    font-size: 36px; color: #222; text-align: center;
+    line-height: 100%; border-bottom: 3px solid #999;
+}
+
+.pop_inner .close{
+    position: absolute; right:40px; top:40px;
+    width: 41px; height: 41px; background: url(C:\GIT\co-ok\UI\close.png) no-repeat;
+}
+
+.pop_inner .register{position: absolute; bottom: 30px; left: 50%}
+
+.pop_inner .con{
+    padding: 50px 100px; border-bottom: 1px solid #999;
+}
+
+table.type1 th{ font-size: 13px; color: #222; text-align: left; font-weight: normal;}
+table.type1 th span{color : #de4f41}
+table.type1 th em{color: #999;}
+.product{
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+.product-table tr{
+    position: absolute;
+    left: 20%;
+}
+.product-table th{
+    padding: 40px;
 }
 
 a{
     text-decoration: none;
 }
 a{
-    font-size: 15px; color: #999;
+
     text-decoration: none; 
 }
 
-a:visited{
+a:visited {
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
-a:focus{
+a:focus {
     text-decoration: none;
 }
 
-a:hover, a:active{
+a:hover, a:active {
     text-decoration: none;
 }
