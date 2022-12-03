@@ -1,2 +1,2 @@
 #__init__.py
-import card, moneyTransfer
+from user.consumer.payment import card, moneyTransfer
