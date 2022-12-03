@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+    <meta charset="UTF-8">
+    <title> group_buy </title>
+    <link rel="stylesheet" href = "participate.css">
+    <script src="jquery-3.4.1js"></script>
+</head>
+<header>
+    <div class = "logo">
+        <a href=""> <img src = "smallLogo.png"; width="175px"></a>
+        <div>공동 구매</div>
+    </div>
+    <div class = "menu-bar">
+        <a href = "">소비자 <div id = "nickname"></div></a>
+        <a href="mypage_customer.html">마이 페이지</a>
+        <a href="login.html">로그아웃</a> 
+    </div>
+</header>
+
+<body>
+    <div class ="img">
+        <span>판매자 : 도깡이</span>
+        <button class = "consult" type="button">채팅 상담</button>
+        <br>
+        <img src="group.png" width="300" height="300"> 
+    </div>
+    <div class="info">
+        <p><i> 스낵/ </i><b>도깡이 츄르</b> D-3</p>
+        <hr><br>
+        <p><b> 원가</b>  3,000원</p>
+        <p><b> 인당 할인율</b>  60%</p>
+        <p><b> 구매모임 현황</b>  48/50명</p>
+        <hr><br>
+        <b> 구매수량</b>
+    </div>
+
+    <select name = "sort">
+        <option value = "1">1 개</option>
+        <option value = "2">2 개</option>
+        <option value = "3">3 개</option>
+        <option value = "4">4 개</option>
+        <option value = "5">5 개</option>
+    </select>  
+
+    <button class = "purchase" type="button">구매</button>
+
+</body>
+
+<script>
+    var nickname = "도깡이";
+    document.getElementById("nickname").innerHTML = nickname;
+</script>
+
+</html>
