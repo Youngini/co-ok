@@ -17,7 +17,9 @@ import pandas as pd
 app = Flask(__name__)
 
 global user
+global product_list
 user = None
+product_list = None
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -34,6 +36,8 @@ def home():
         if user.dbLogin(identifier, password):
             return render_template('main_seller.html')
         
+        user = None
+        
     if type(user) is Consumer:
         return render_template('main_customer.html')
     if type(user) is CorporateSeller:
@@ -47,16 +51,26 @@ def login():
 
 @app.route('/consumer')
 def consumer():
-    user
-    return render_template('mypage_consumer.html')
+    conn = pymysql.connect(
+            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
+    cur = conn.cursor(pymysql.cursors.DictCursor)
+    rs = cur.execute("""select * from ordering where consumer_id = '%s'
+                                   """ % (user.get_identifier))
+    rs = cur.fetchall()
+        
+    conn.commit()
+    cur.close()
+    
+    return render_template('mypage_consumer.html', rs = rs)
 
 @app.route('/seller')
 def seller():
-    return render_template('mypage_seller.html')
+    return render_template('mypage_seller.html', )
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
     global user
+    global product_list
     if request.method == 'POST':
         searching = request.form['searching']
         conn = pymysql.connect(
@@ -66,7 +80,12 @@ def search():
                                    """ % (searching))
         rs = cur.fetchall()
         
-        print(rs)
+        product_list = [Product().dbRetrieve(i['identifier']) for i in rs]
+        
+        print(product_list)
+        
+        conn.commit()
+        cur.close()
         
         if type(user) is Consumer:
             return render_template('search_customer.html', products = rs)
@@ -74,6 +93,12 @@ def search():
             return render_template('search_seller.html', products = rs)
     
     return render_template('main.html')   
+
+@app.route('/groups', methods=['POST', 'GET'])
+def groups():
+    if request.method == 'POST':
+        searching = request.form['id']
+        print(searching)
 
 if __name__ == '__main__':
 	app.run(host=sys.argv[1], port=int(sys.argv[2]))

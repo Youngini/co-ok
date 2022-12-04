@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title> mypage_seller </title>
-    <link rel="stylesheet" href = "mypage_consumer.html">
+    <link rel="stylesheet" href = "mypage_consumer.css">
     <script src="jquery-3.4.1js"></script>
 </head>
 <header>
-    <div class = "logo"><a href="main_seller.html"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
+    <div class = "logo"><a href="main_seller.html"> <img src = "smallLogo.png"; width="175px"></a></div>
     <div class = "menu-bar">
         <a href = ""><div id = "nickname"></div></a>
         <a href="/consumer">마이 페이지</a>
@@ -100,21 +100,19 @@
             <table class = "product-table">
                 <thead>
                     <tr>
-                        <th>번호</th>
-                        <th>사진</th>
-                        <th>상품명</th>
+                        <th>이름</th>
+                        <th>구매 인원</th>
                         <th>결제 금액</th>
                     </tr>
                 </thead>
             </table>
 
             <tbody>
-                {for i in data_list %}
+                {%for i in rs %}
                 <tr>
-                    <td>{{ i[0] }}</td>
-                    <td>{{ i[1] }}</td>
-                    <td>{{ i[2] }}</td>
-                    <td>{{ i[3] }}</td>
+                    <td>{{ i['name'] }}</td>
+                    <td>{{ i['limit_number'] }}</td>
+                    <td>{{ i['dicounted_price'] }}</td>
                     <a href="#a" class = "exchange">후기</a>
                     <a href="">교환</a>
                     <a href="">반품</a>

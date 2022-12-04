@@ -7,11 +7,11 @@
     <script src="jquery-3.4.1js"></script>
 </head>
 <header>
-    <div class = "logo"><a href="/"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
+    <div class = "logo"><a href="main_seller.html"> <img src = "smallLogo.png"; width="175px"></a></div>
     <div class = "menu-bar">
         <a href = ""><div id = "nickname"></div></a>
-        <a href="/seller">마이 페이지</a>
-        <a href="/">로그아웃</a> 
+        <a href="">마이 페이지</a>
+        <a href="">로그아웃</a> 
     </div>
 </header>
 
@@ -36,12 +36,6 @@
                             <h2>상품 등록</h2>
                             <div class = "con">
                                 <table class="type1">
-                                    <caption>
-                                        <details class = "hide">
-                                            <summary> 상품 추가 폼</summary>
-                                            <div>상품명,원가,인당할인율,구매모임인원,모집기한,상품사진,카테고리</div>
-                                        </details>
-                                    </caption>
                                     <colgroup>
                                         <col>
                                     </colgroup>
@@ -72,19 +66,20 @@
                                         </tr>
                                         <tr>
                                             <th><label for="">카테고리</label></th>
-                                            <select name = "category">
-                                                <option value="">카테고리</option>
-                                                <option value="가공식품">가공식품</option>
-                                                <option value="곡류">곡류</option>
-                                                <option value="과일">과일</option>
-                                                <option value="수산물">수산물</option>
-                                                <option value="스낵">스낵</option>
-                                                <option value="육류">육류</option>
-                                                <option value="음료">음료</option>
-                                                <option value="조미료">조미료</option>
-                                                <option value="채소">채소</option>
-                                            </select>
-                                            <td></td>
+                                            <td>
+                                                <select name = "category">
+                                                    <option value="">카테고리</option>
+                                                    <option value="가공식품">가공식품</option>
+                                                    <option value="곡류">곡류</option>
+                                                    <option value="과일">과일</option>
+                                                    <option value="수산물">수산물</option>
+                                                    <option value="스낵">스낵</option>
+                                                    <option value="육류">육류</option>
+                                                    <option value="음료">음료</option>
+                                                    <option value="조미료">조미료</option>
+                                                    <option value="채소">채소</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -114,7 +109,7 @@
             </table>
 
             <tbody>
-                {for i in data_list %}
+                {%for i in data_list %}
                 <tr>
                     <td>{{ i[0] }}</td>
                     <td>{{ i[1] }}</td>
