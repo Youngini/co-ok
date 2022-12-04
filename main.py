@@ -12,6 +12,7 @@ from Order.Return import Return
 from Order.Exchange import Exchange
 import sys
 import pymysql
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -46,11 +47,33 @@ def login():
 
 @app.route('/consumer')
 def consumer():
-    return render_template('mypage_seller.html')
+    user
+    return render_template('mypage_consumer.html')
 
 @app.route('/seller')
 def seller():
     return render_template('mypage_seller.html')
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    global user
+    if request.method == 'POST':
+        searching = request.form['searching']
+        conn = pymysql.connect(
+            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
+        cur = conn.cursor(pymysql.cursors.DictCursor)
+        rs = cur.execute("""select * from product where name like '%%%s%%'
+                                   """ % (searching))
+        rs = cur.fetchall()
+        
+        print(rs)
+        
+        if type(user) is Consumer:
+            return render_template('search_customer.html', products = rs)
+        if type(user) is CorporateSeller:
+            return render_template('search_seller.html', products = rs)
+    
+    return render_template('main.html')   
 
 if __name__ == '__main__':
 	app.run(host=sys.argv[1], port=int(sys.argv[2]))
