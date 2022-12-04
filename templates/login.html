@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> Login </title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href = "login.css">
+    <link href="{{ url_for('static', filename='login.css') }}" rel="stylesheet">
 </head>
 <body>
     <section class = "login-form">
@@ -25,7 +25,7 @@
                 <label for = "pw">비밀번호</label>
             </div>
             <div class = "btn-area">
-                <button type = "submit">로그인</button> 
+                <button type = "submit" id = >로그인</button> 
             </div>
         </form>
         <div class = "caption">
