@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <title>CO-OK</title>
-    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
-    <script src="jquery-3.4.1js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>CO-OK</title>
+        <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+        <script src="jquery-3.4.1js"></script>
+    </head>
 
-<header>
-    <div class = "menu-bar"style="text-align:right;">
-        <a href = "">판매자 <div id = "nickname"></div></a>
-        <a href="/seller">마이 페이지</a>
-        <a href="/">로그아웃</a> 
-    </div>
-</header>
+    <header>
+        <div class = "menu-bar"style="text-align:right;">
+            <a href = "">판매자 <div id = "nickname"></div></a>
+            <a href="/seller">마이 페이지</a>
+            <a href="/">로그아웃</a> 
+        </div>
 
-<script>
-    var nickname = "민주";
-    document.getElementById("nickname").innerHTML = nickname;
-</script>
-
-<body>
-
-    <div class = "logo:" style = "text-align: center;">
-        <img src="../static/Logo.png" height = "375px">
+        <div class = "menu-bar"style="text-align:right;">
+            <div class="login_bar" onclick="location.href='/login';">로그인</div>
+        </div>
         
-    </div>
+    </header>
 
-<form action = "/search" method="post">
-    <div class="search:" style="text-align: center;">
-        <input type="text" placeholder="상품명을 입력하세요", name="searching">
-        <button class="btn_search" type="submit"><img src="../static/btn_search.png" height="15" ></button>
-    </div>
-	</form>
+    <script>
+        var nickname = "민주";
+        document.getElementById("nickname").innerHTML = nickname;
+    </script>
 
-    <div class="category:" style="text-align:center;">
-        <br/>
-        <button class="가공식품" style="margin-right: 10px;" href="/search">가공식품</button>
-        <button class="곡류" style="margin-right: 10px;" href="/search">곡류</button>
-        <button class="과일" href="/search">과일</button>
-        <br/> <br/>
-        <button class="육류" style="margin-right: 25px;" href="/search">육류</button>
-        <button class="수산물" style="margin-right: 8px;" href="/search">수산물</button>
-        <button class="채소" href="/search">채소</button>
-        <br/> <br/>
-        <button class="조미료" style="margin-right: 22px;" href="/search">조미료</button>
-        <button class="스낵" style="margin-right: 12px;" href="/search">스낵</button>
-        <button class="음료" href="/search">음료</button>
-    </div>
+    <body>
 
-</body>
+        <div class = "logo:" style = "text-align: center;">
+            <img src="../static/Logo.png" height = "350px">
+            
+        </div>
 
-
+        <form action = "/search" method="post">
+            <div class="search">
+                <input class = "search_bar"type="text" placeholder="상품명을 입력하세요", name="searching">
+                <button class="btn_search" type="submit"><img src="../static/btn_search.png" height="15" ></button>
+            </div>
+        </form>
+        <div class="category">
+            <div class="category_content"><img src = "../static/propessedfood.png" href="/search"><p>가공식품</p></div>
+            <div class="category_content"><img src = "../static/meal.png" href="/search"><p>곡류</p></div>
+            <div class="category_content"><img src = "../static/fruit.png" href="/search"><p>과일</p></div>
+            <div class="category_content"><img src = "../static/meat.png" href="/search"><p>육류</p></div>
+            <div class="category_content"><img src = "../static/seafood.png" href="/search"><p>수산물</p></div>
+            <div class="category_content"><img src = "../static/vegetable.png" href="/search"><p>채소</p></div>
+            <div class="category_content"><img src = "../static/msg.png" href="/search"><p>조미료</p></div>
+            <div class="category_content"><img src = "../static/snack.png" href="/search"><p>스낵</p></div>
+            <div class="category_content"><img src = "../static/drink.png" href="/search"><p>음료</p></div>
+        </div>
+        
+    </body>
 </html>
+    
