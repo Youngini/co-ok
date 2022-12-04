@@ -113,8 +113,8 @@ header{
     position: fixed; left: 50%; top: 50%; padding: 0 60px;
     width: 820px; height: 833px;
     transform: translate(-50%, -50%); border: 1px solid black; 
-    opacity: 1;
     box-sizing: border-box;
+    background:white; 
 }
 
 .pop_inner h2{
@@ -131,13 +131,14 @@ header{
 .pop_inner .register{position: absolute; bottom: 30px; left: 50%}
 
 .pop_inner .con{
-    padding: 50px 100px; border-bottom: 1px solid #999;
+    padding: 50px 80px; border-bottom: 1px solid #999;
     font-size: 18px;
 }
 
 table.type1 th{ font-size: 13px; color: #222; text-align: left; font-weight: normal;}
 table.type1 th span{color : #de4f41}
 table.type1 th em{color: #999;}
+table.type1 .range{font-size: 13px; color: #222;}
 .product{
     position: relative;
     width: 100%;

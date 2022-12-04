@@ -11,7 +11,7 @@
     <div class = "menu-bar">
         <a href = ""><div id = "nickname"></div></a>
         <a href="">마이 페이지</a>
-        <a href="">로그아웃</a> 
+        <a href="main.html">로그아웃</a> 
     </div>
 </header>
 
@@ -54,7 +54,8 @@
                                         </tr>
                                         <tr>
                                             <th><label for="">구매모임인원</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
+                                            <td class = "range"><label for="">최소</label> <input type="number" placeholder="최소 인원"> </td>
+                                            <td class = "range"><label for="">최대</label> <input type="number" placeholder="최대 인원"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="">모집기한</label></th>
@@ -139,7 +140,7 @@
     // 팝업 열기
     target.addEventListener('click', function(){
         targetID = this.getAttribute('href');
-         document.querySelector(targetID).style.display = 'block';
+        document.querySelector(targetID).style.display = 'block';
     });
 
     // 팝업 닫기
