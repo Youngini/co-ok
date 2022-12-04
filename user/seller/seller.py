@@ -44,10 +44,10 @@ class Seller(User):
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
 
-        self.__identifier = rs.item(0)
-        self.__password = rs.item(1)
-        self.__phone_number = rs.item(2)
-        self.__name = rs.item(3)
+        self.identifier = rs.item(0)
+        self.password = rs.item(1)
+        self.phone_number = rs.item(2)
+        self.name = rs.item(3)
         self.__business_name = rs.item(4)
         self.__email_address = rs.item(5)
         self.__seller_account = rs.item(6)

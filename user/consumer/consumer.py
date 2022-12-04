@@ -41,10 +41,10 @@ class Consumer(User):
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
 
-        self.__identifier = rs.item(0)
-        self.__password = rs.item(1)
-        self.__phone_number = rs.item(2)
-        self.__name = rs.item(3)
+        self.identifier = rs.item(0)
+        self.password = rs.item(1)
+        self.phone_number = rs.item(2)
+        self.name = rs.item(3)
         self.__location = rs.item(4)
         self.__nick_name = rs.item(5)
         
@@ -74,10 +74,10 @@ class Consumer(User):
         return self.__nick_name
 
     def print(self):
-        print(self.__identifier)
-        print(self.__password)
-        print(self.__phone_number)
-        print(self.__name)
+        print(self.identifier)
+        print(self.password)
+        print(self.phone_number)
+        print(self.name)
         print(self.__location)
         print(self.__nick_name)
 

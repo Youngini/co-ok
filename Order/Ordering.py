@@ -28,17 +28,17 @@ class Ordering:
 
     def dbInsert(self):
         self.__dbInit()
-        self.cur.execute("""INSERT INTO Ordering
-                                   VALUES('%s', '%s', '%d', '%d', '%s', '%s');
+        self.cur.execute("""INSERT INTO ordering
+                                   VALUES('%s', '%s', %d, %d, '%s', '%s');
                                    """
-                         % (self.__identifier, self.__order_date, self.__product_number,
-                            self.__paid_price, self.__group_id, self._consumer_id))
+                         % (self.__identifier, self.__order_date, int(self.__product_number),
+                            int(self.__paid_price), self.__group_id, self._consumer_id))
         self.conn.commit()
         self.cur.close()
 
     def dbRetrieve(self, identifier):
         self.__dbInit()
-        rs = self.cur.execute("""select * from Ordering where identifier='%s';
+        rs = self.cur.execute("""select * from ordering where identifier='%s';
                                    """ % (identifier))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
@@ -101,6 +101,11 @@ class Ordering:
         print(self.__paid_price)
         print(self.__group_id)
         print(self.__consumer_id)
+        
+    @classmethod
+    def make_identifier(cls):
+        return "od" + datetime.now().strftime('%y%m%d%H%M%S%f')
+
 
 
 #order = Ordering('6789', '2022-12-03', '1234', 30, '4567', '3456')

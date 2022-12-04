@@ -186,6 +186,10 @@ class Product:
         # def getGroup()
         # 최소가격이 원가의 50%이하일때 판매자한테 경고
         # 할인공식:(100-인당할인률)/100 ** 구매인ㅇ
+        
+    @classmethod
+    def make_identifier(cls):
+        return "pd" + datetime.now().strftime('%y%m%d%H%M%S%f')
 
 #pro = Product('1234','hongs',30,20,10,12,'2022-11-29','drinks','2345')
 #pro.assign_product()

@@ -6,6 +6,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import pymysql
 import pandas as pd
+from datetime import datetime
 
 class BuyGroup:
     def __init__(self, identifier="", name="", limit_number=30, product_id=""):
@@ -26,7 +27,7 @@ class BuyGroup:
     def dbInsert(self):
         self.__dbInit()
         self.cur.execute("""INSERT INTO buygroup
-                                   VALUES('%s', '%s', '%d', '%s', '%d');
+                                   VALUES('%s', '%s', %d, '%s', %d);
                                    """
                                    % (self.__identifier, self.__name, self.__limit_number, self.__product_id, self.__dicounted_price))
         self.conn.commit()
@@ -53,14 +54,14 @@ class BuyGroup:
         rs=pd.DataFrame(rs).values
 
         origin_price = rs.item(0)
-        discount_rate = rs.item(1)
+        discount_rate = rs.item(1) * 0.01
         group_member_number = self.__limit_number
 
-        discounted_cost = origin_price * ((100-discount_rate)/100)**group_member_number ## 이 부분 맞는지 확인 부탁드립니다
+        discounted_cost = origin_price * ((100-discount_rate)/100)**int(group_member_number) ## 이 부분 맞는지 확인 부탁드립니다
 
         print(discounted_cost)
 
-        return discounted_cost
+        return int(discounted_cost)
 
     def print(self):
         print(self.__identifier)
@@ -98,6 +99,10 @@ class BuyGroup:
 
     def get_discounted_price(self):
         return self.__dicounted_price
+    
+    @classmethod
+    def make_identifier(cls):
+        return "gr" + datetime.now().strftime('%y%m%d%H%M%S%f')
     
 #buygroup = BuyGroup('4567', 'group1',45,'1234',20)
 #buygroup = BuyGroup('5678','group2',46,'1234')

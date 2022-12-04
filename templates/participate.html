@@ -8,7 +8,7 @@
 </head>
 <header>
     <div class = "logo">
-        <a href=""> <img src = "smallLogo.png"; width="175px"></a>
+        <a href=""> <img src = "../static/smallLogo.png"; width="175px"></a>
         <div>공동 구매</div>
     </div>
     <div class = "menu-bar">
@@ -20,61 +20,56 @@
 
 <body>
     <div class ="img">
-        <span>판매자 : 도깡이</span>
+        <span>판매자 : {{slrs[0]['name']}}</span>
         <button class = "consult" type="button">채팅 상담</button>
         <br>
         <img src="../static/chu.png" width="300" height="300"> 
     </div>
     <div class="info">
-        <p><i> 스낵/ </i><b>도깡이 츄르</b> D-3</p>
+        <p><i> {{pdrs[0]['category']}} </i><b>{{pdrs[0]['name']}}</b> {{pdrs[0]['apply_deadline']}}</p>
         <hr><br>
-        <p><b> 원가</b>  3,000원</p>
-        <p><b> 인당 할인율</b>  0.6%</p>
-        <p><b> 구매모임 현황</b>  48/50명</p><br>
+        <p><b> 원가</b>  {{pdrs[0]['cost']}}</p>
+        <p><b> 인당 할인율</b>  0.{{pdrs[0]['discount_per_person']}}</p>
+        <p><b> 구매모임 현황</b>  {{grcnt}}/{{grrs[0]['limit_number']}}</p><br>
         <hr><br>
         <b> 구매수량</b>
     </div>
-
-    <select name = "sort">
-        <option value = "1">1 개</option>
-        <option value = "2">2 개</option>
-        <option value = "3">3 개</option>
-        <option value = "4">4 개</option>
-        <option value = "5">5 개</option>
-    </select> 
 
     <div class="wrap">
         <a href="#pop_info_1" class="btn_open">구매</a>
       
         <div id="pop_info_1" class="pop_wrap" style="display:none;">
             <div class="pop_inner">
+				<form action='/done' method='post'>
                 <div class="dsc">
                     <div class ="order" style="text-align: left;">
-                        <p><b>상품명 : </b>도깡이 츄르</p>
-                        <P><b>상품 개수 : </b> 7개</P>
-                        <b>상품 금액 : </b> 8,400원
+                        <p><b>상품명 : </b>{{pdrs[0]['name']}}</p>
+                        <P><b>상품 개수 : </b> <input type="number" placeholder="인원 입력하세요" id='personnel' name='personnel'></P>
+                        <b>상품 금액 : </b> {{grrs[0]['dicounted_price']}}
                     </div>
                     <div class="orderimg" style="text-align: right;">
                         <img src="chu.png" width="100" height="100" >
                     </div>
                     <hr>
                     <p><i>배송지</i></p><br>
-                    <p><b>우리 집</b>  대구 북구 대학로 80 ...    <button type ="button">변경</button></p>
+                    <p><b>우리 집</b>   {{usrs[0]['location']}}   <button type ="button">변경</button></p>
                     <p><b>계좌/카드</b>  BC 카드 202211******, 일시불   <button type ="button">변경</button></p>
                     <p><b>쿠폰  </b> <select name = "coupon">
                         <option value = "0">쿠폰을 선택하세요.</option>
                         <option value = "1">첫 구매 50% 할인</option>
                         <option value = "2">-1000원</option></select></p>
                     <br><hr>
-                    <p><b>총 금액 : 8,400원</b></p>
+                    <p><b id='price'></b></p>
                     <hr><br><br>
                     <span>회원 본인은 위 주문 내용을 확인하였으며, 구매 조건, 결제 대행 서비스 및 결제에 동의합니다.</span>
                     <form method="get" action="form-action.html">
                         <label><input type="checkbox" name="agree"> 동의</label>
                     </form><br>
-                    <button type="button" class="btn_close">결제</button>
-                    <button type="button" class="btn_close">취소</button>
+					<input type='hidden' name='identifier' value="{{grrs[0]['identifier']}}">
+                    <button type="submit" class="btn_close">결제</button>
+                    <button type="button" class="btn_close" onclick='href="/"'>취소</button>
                 </div>
+				</form>
             </div>
         </div>
     </div>
@@ -89,7 +84,10 @@
     var target = document.querySelectorAll('.btn_open');
     var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
     var targetID;
-
+	function show(){
+		document.getElementById("price").innerHTML = "결제 금액 :" + document.getElementById('personnel').value * {{grrs[0]['dicounted_price']}} + "원"; 
+	}
+	
 // 팝업 열기
 for(var i = 0; i < target.length; i++){
   target[i].addEventListener('click', function(){
@@ -104,6 +102,9 @@ for(var j = 0; j < target.length; j++){
     this.parentNode.parentNode.style.display = 'none';
   });
 }
+	
+	show();
+	interval(show, 10);
 
 </script>
 
