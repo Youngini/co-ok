@@ -23,79 +23,7 @@
             <li><a href="">결제수단</a></li>
             <li><a href="">배송지</a></li>
         </ul>
-    </div> 
-
-    <div class = "content">
-        <div class = "info">
-            <div class = "content_upper">
-                <div id = "order_content"></div>
-                <div>
-
-                      <!-- 팝업1 -->
-                    <div id="pop_plus" class="pop_wrap" style="display:none;">
-                        <div class="pop_inner">
-                            <h2>교환 신청</h2>
-                            <div class = "con">
-                                <table class="type1">
-                                    <caption>
-                                        <details class = "hide">
-                                            <summary> 상품 추가 폼</summary>
-                                            <div>상품명,주문 개수,주문일자,결제금액</div>
-                                        </details>
-                                    </caption>
-                                    <colgroup>
-                                        <col>
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th><label for="">상품명</label></th>
-                                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">주문 개수</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">주문일자</label></th>
-                                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">결제금액</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">교환 종류</label></th>
-                                            <td>
-                                                <ul>
-                                                    <li><input type = "checkbox" id = "ch1"><label for = "ch1">개인적 사유</label></li>
-                                                    <li><input type = "checkbox" id = "ch2"><label for = "ch2">판매자측 사유</label></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">교환 사유</label>(0/1000byte)</th>
-                                            <td>
-                                                <input type="text" placeholder="1000자 이내로 적어주세요">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">첨부 사진</label></th>
-                                            <td><input type="file" placeholder="사진을 입력하세요"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
-                            <a href="#a" class = "register">제출</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-          
-
+    </div>       
         <div class = "product">
             <table class = "product-table">
                 <thead>
@@ -110,17 +38,76 @@
             <tbody>
                 {%for i in rs %}
                 <tr>
-                    <td>{{ i['name'] }}</td>
-                    <td>{{ i['limit_number'] }}</td>
-                    <td>{{ i['dicounted_price'] }}</td>
-                    <a href="#a" class = "exchange">후기</a>
-                    <a href="">교환</a>
-                    <a href="">반품</a>
-                </tr>
-                {% endfor %}
-            </tbody>
+                    <td>{{ i['paid_price'] }}원</td>
+                    <td>{{ i['product_number'] }}개</td>
+                    <td>{{ i['order_date'] }}</td>
+                    <a href="#a" class = "exchange">후기</a></tr></tbody>
+                    <div class = "content">
+        <div class = "info">
+            <div class = "content_upper">
+                <div id = "order_content"></div>
+                <div>
+ 					<a href="#pop_plus" class = "exchange">교환 환불 신청</a>
+                      <!-- 팝업1 -->
+                    <div id="pop_plus" class="pop_wrap" style="display:none;">
+                        <div class="pop_inner">
+							<form action='' method='post'>
+                            <h2>교환 환불 신청</h2>
+                            <div class = "con">
+                                <table class="type1">
+                                    <caption>
+                                        <details class = "hide">
+                                            <summary> 상품 추가 폼</summary>
+                                            <div>상품명,주문 개수,주문일자,결제금액</div>
+                                        </details>
+                                    </caption>
+                                    <colgroup>
+                                        <col>
+                                    </colgroup>
+                                    <tbody>
+										<th><label for="">환불 교환 선택</label></th>
+                                            <td>
+                                                <ul>
+                                                    <li><input type = "checkbox" name='refund' value=1 id = "ch1"><label for = "ch1">환불</label></li>
+                                                    <li><input type = "checkbox" name='exchange' value=2 id = "ch2"><label for = "ch2">교환</label></li>
+                                                </ul>
+                                            </td>
+                                        <tr>
+                                            <th><label for="">과실 종류</label></th>
+                                            <td>
+                                                <ul>
+                                                    <li><input type = "checkbox" name = 'seller' id = "ch1"><label for = "ch1">개인적 사유</label></li>
+                                                    <li><input type = "checkbox" name = 'consumer' id = "ch2"><label for = "ch2">판매자측 사유</label></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">사유</label>(0/1000byte)</th>
+                                            <td>
+                                                <input type="text" name='reason' placeholder="1000자 이내로 적어주세요">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">첨부 사진</label></th>
+                                            <td><input type="file" placeholder="사진을 입력하세요"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+								<input type='hidden' name='identifier' value="{{i['identifier']}}">
+                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+                            <button type='submit'>제출</button>
+								</form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
+						
+                
+						</div>{% endfor %}
+			</div>
 </body>
 
 <script>

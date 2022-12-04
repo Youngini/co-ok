@@ -57,9 +57,9 @@ def consumer():
             host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
     cur = conn.cursor(pymysql.cursors.DictCursor)
     rs = cur.execute("""select * from ordering where consumer_id = '%s'
-                                   """ % (user.get_identifier))
+                                   """ % (user.get_identifier()))
     rs = cur.fetchall()
-        
+    
     conn.commit()
     cur.close()
     
