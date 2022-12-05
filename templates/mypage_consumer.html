@@ -1,149 +1,141 @@
 <!DOCTYPE html>
 <html lang = "ko">
-<head>
-    <meta charset="UTF-8">
-    <title> mypage_seller </title>
-    <link href="{{ url_for('static', filename='mypage_consumer.css') }}" rel="stylesheet">
-    <script src="jquery-3.4.1js"></script>
-</head>
-<header>
-    <div class = "logo"><a href="main_seller.html"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
-    <div class = "menu-bar">
-        <a href = ""><div id = "nickname"></div></a>
-        <a href="/consumer">마이 페이지</a>
-        <a href="/">로그아웃</a> 
-    </div>
-</header>
+    <head>
+        <meta charset="UTF-8">
+        <title> mypage_seller </title>
+        <link href="{{ url_for('static', filename='mypage_consumer.css') }}" rel="stylesheet">
+        <script src="jquery-3.4.1js"></script>
+    </head>
+    <header>
+        <div class = "logo"><a href="main_seller.html"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
+        <div class = "menu-bar">
+            <a href = ""><div id = "nickname"></div></a>
+            <a href="/consumer">마이 페이지</a>
+            <a href="/">로그아웃</a> 
+        </div>
+    </header>
 
-<body>
-    <div class = "menu-left">
-        <ul class = "vertical-menu">
-            <li><a href="">개인정보</a></li>
-            <li><a href="">주문내역</a></li>
-            <li><a href="">결제수단</a></li>
-            <li><a href="">배송지</a></li>
-        </ul>
-    </div> 
+    <body>
+        <div class = "menu-left">
+            <ul class = "vertical-menu">
+                <li><a href="">개인정보</a></li>
+                <li><a href="">주문내역</a></li>
+                <li><a href="">결제수단</a></li>
+                <li><a href="">배송지</a></li>
+            </ul>
+        </div> 
 
-    <div class = "content">
-        <div class = "info">
-            <div class = "content_upper">
-                <div id = "order_content"></div>
-                <div>
-
-                      <!-- 팝업1 -->
-                    <div id="pop_plus" class="pop_wrap" style="display:none;">
-                        <div class="pop_inner">
-                            <h2>교환 신청</h2>
-                            <div class = "con">
-                                <table class="type1">
-                                    <caption>
-                                        <details class = "hide">
-                                            <summary> 상품 추가 폼</summary>
-                                            <div>상품명,주문 개수,주문일자,결제금액</div>
-                                        </details>
-                                    </caption>
-                                    <colgroup>
-                                        <col>
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th><label for="">상품명</label></th>
-                                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">주문 개수</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">주문일자</label></th>
-                                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">결제금액</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">교환 종류</label></th>
-                                            <td>
-                                                <ul>
-                                                    <li><input type = "checkbox" id = "ch1"><label for = "ch1">개인적 사유</label></li>
-                                                    <li><input type = "checkbox" id = "ch2"><label for = "ch2">판매자측 사유</label></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">교환 사유</label>(0/1000byte)</th>
-                                            <td>
-                                                <input type="text" placeholder="1000자 이내로 적어주세요">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">첨부 사진</label></th>
-                                            <td><input type="file" placeholder="사진을 입력하세요"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="#a" class = "close"><img src = "close.png"; width="30px"></a>
-                            <a href="#a" class = "register">제출</a>
-                        </div>
-                    </div>
-
+        <div class = "content">
+            <div class = "info">
+                <div class = "content_upper">
+                    <div id = "order_content"></div>
                 </div>
             </div>
+            
+            <div class = "product"> 
+                <ul class = "product-table">
+                    <!--테이블 헤더-->
+                    <li class="product-list">
+                        <div class="product-content">
+                            <div class="product-name">상품명</div>
+                            <div class="product-price">결제 금액</div>
+                            <div class="product-deadline">주문 날짜</div>
+                        </div>
+                    </li>
+                    <!--테이블 바디-->
+                    {%for i in rs%}
+                    <li class="product-list">
+                        <div class="product-content">
+                            <div class="product-name">{{ i['name'] }}</div>
+                            <div class="product-price">{{ i['cost'] }}</div>
+                            <div class="product-deadline">{{ i['deadline'] }}</div>
+                            <div class="product-button">
+                                <button type="button" class="btn_review">후기</button>
+                                <button href = "#pop_plus" type="button" class="btn_change">교환</button>
+                                <button type="button" class="btn_return">반품</button>
+                            </div>
+                        </div>
+                    </li>
+                    {% end for%}
+                </ul>
+            </div>
         </div>
+    </body>
 
-          
-
-        <div class = "product">
-            <table class = "product-table">
-                <thead>
-                    <tr>
-                        <th>이름</th>
-                        <th>구매 인원</th>
-                        <th>결제 금액</th>
-                    </tr>
-                </thead>
-            </table>
-
-            <tbody>
-                {%for i in rs %}
-                <tr>
-                    <td>{{ i['name'] }}</td>
-                    <td>{{ i['limit_number'] }}</td>
-                    <td>{{ i['dicounted_price'] }}</td>
-                    <a href="#a" class = "exchange">후기</a>
-                    <a href="">교환</a>
-                    <a href="">반품</a>
-                </tr>
-                {% endfor %}
-            </tbody>
+    <!-- 팝업1 -->
+    <div id="pop_plus" class="pop_wrap" style="display:none;">
+        <div class="pop_inner">
+            <h2>교환 신청</h2>
+            <div class = "con">
+                <table class="type1">
+                    <colgroup>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><label for="">상품명</label></th>
+                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="">주문 개수</label></th>
+                            <td><input type="number" placeholder="원가를 입력하세요"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="">주문일자</label></th>
+                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="">결제금액</label></th>
+                            <td><input type="number" placeholder="원가를 입력하세요"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="">교환 종류</label></th>
+                            <td>
+                                <ul>
+                                    <li><input type = "checkbox" id = "ch1"><label for = "ch1">개인적 사유</label></li>
+                                    <li><input type = "checkbox" id = "ch2"><label for = "ch2">판매자측 사유</label></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="">교환 사유</label>(0/1000byte)</th>
+                            <td>
+                                <input type="text" placeholder="1000자 이내로 적어주세요">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="">첨부 사진</label></th>
+                            <td><input type="file" placeholder="사진을 입력하세요"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+            <a href="#a" class = "register">제출</a>
         </div>
     </div>
-</body>
 
-<script>
-    var nickname = "도깡이";
-    document.getElementById("nickname").innerHTML = "소비자 " + nickname+"님";
-    document.getElementById("order_content").innerHTML = nickname+"님의 주문 내역";
+    <script>
+        var nickname = "도깡이";
+        document.getElementById("nickname").innerHTML = "소비자 " + nickname+"님";
+        document.getElementById("order_content").innerHTML = nickname+"님의 주문 내역";
 
-    var target = document.querySelector('.exchange'); // 클릭할 버튼요소를 변수 처리
-    var btnPopClose = document.querySelector('.close');
-    var btnProdectRegister = document.querySelector('.btn_registration');
-    var targetID;
+        var target = document.querySelector('.btn_change'); // 클릭할 버튼요소를 변수 처리
+        var btnPopClose = document.querySelector('.close');
+        var btnProdectRegister = document.querySelector('.btn_registration');
+        var targetID;
 
-    // 팝업 열기
-    target.addEventListener('click', function(){
-        targetID = this.getAttribute('href');
-         document.querySelector(targetID).style.display = 'block';
-    });
+        // 팝업 열기
+        target.addEventListener('click', function(){
+            targetID = this.getAttribute('href');
+            document.querySelector(targetID).style.display = 'block';
+        });
 
-    // 팝업 닫기
-    btnPopClose.addEventListener('click', function(){
-      this.parentNode.parentNode.style.display = 'none';
-    });
+        // 팝업 닫기
+        btnPopClose.addEventListener('click', function(){
+        document.querySelector(targetID).style.display = 'none';
+        });
 
-</script>
+    </script>
 
 </html>

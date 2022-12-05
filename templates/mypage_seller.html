@@ -1,165 +1,167 @@
 <!DOCTYPE html>
 <html lang = "ko">
-<head>
-    <meta charset="UTF-8">
-    <title> mypage_seller </title>
-    <link href="{{ url_for('static', filename='mypage_seller.css') }}" rel="stylesheet">
-    <script src="jquery-3.4.1js"></script>
-</head>
-<header>
-    <div class = "logo"><a href="main_seller.html"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
-    <div class = "menu-bar">
-        <a href = ""><div id = "nickname"></div></a>
-        <a href="">마이 페이지</a>
-        <a href="">로그아웃</a> 
-    </div>
-</header>
+    <head>
+        <meta charset="UTF-8">
+        <title> mypage_seller </title>
+        <link href="{{ url_for('static', filename='mypage_seller.css') }}" rel="stylesheet">
+        <script src="jquery-3.4.1js"></script>
+    </head>
+    <header>
+        <div class = "logo"><a href="main_seller.html"> <img src = "../static/smallLogo.png"; width="175px"></a></div>
+        <div class = "menu-bar">
+            <a href = ""><div id = "nickname"></div></a>
+            <a href="">마이 페이지</a>
+            <a href="">로그아웃</a> 
+        </div>
+    </header>
 
-<body>
-    <div class = "menu-left">
-        <ul class = "vertical-menu">
-            <li><a href="">상품관리</a></li>
-            <li><a href="">개인정보</a></li>
-        </ul>
-    </div> 
-
-    <div class = "content">
-        <div class = "info">
-            <div class = "content_upper">
-                <div id = "product-count"></div>
-                <div>
-                    <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
-
-                    <!-- 팝업1 -->
-                    <div id="pop_plus" class="pop_wrap" style="display:none;">
-                        <div class="pop_inner">
-                            <h2>상품 등록</h2>
-                            <div class = "con">
-                                <table class="type1">
-                                    <colgroup>
-                                        <col>
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th><label for="">상품명</label></th>
-                                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">원가</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">인당 할인율</label></th>
-                                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">구매모임인원</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">모집기한</label></th>
-                                            <td><input type="date" placeholder="날짜를 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">상품 사진</label></th>
-                                            <td><input type="file" placeholder="사진을 입력하세요"></td>
-                                        </tr>
-                                        <tr>
-                                            <th><label for="">카테고리</label></th>
-                                            <td>
-                                                <select name = "category">
-                                                    <option value="">카테고리</option>
-                                                    <option value="가공식품">가공식품</option>
-                                                    <option value="곡류">곡류</option>
-                                                    <option value="과일">과일</option>
-                                                    <option value="수산물">수산물</option>
-                                                    <option value="스낵">스낵</option>
-                                                    <option value="육류">육류</option>
-                                                    <option value="음료">음료</option>
-                                                    <option value="조미료">조미료</option>
-                                                    <option value="채소">채소</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
-                            <a href="#a" class = "register">등록</a>
-                        </div>
+    <body>
+        <div class = "menu-left">
+            <ul class = "vertical-menu">
+                <li><a href="">상품관리</a></li>
+                <li><a href="">개인정보</a></li>
+            </ul>
+        </div> 
+        
+        <div class = "content">
+            <div class = "info">
+                <div class = "content_upper">
+                    <div id = "product-count"></div>
+                    <div>
+                        <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <div class = "product">
-            <ul class = "product-table">
-                <!--테이블 헤더-->
-                <li class="product-list">
-                    <div class="product-content">
-                        <div class="product-num">번호</div>
-                        <div class="product-photo">사진</div>
-                        <div class="product-category">카테고리</div>
-                        <div class="product-name">상품명</div>
-                        <div class="product-price">가격</div>
-                    </div>
-                </li>
-                <!--테이블 바디-->
-                <li class="product-list">
-                    <div class="product-content">
-                        <div class="product-num">1</div>
-                        <div class="product-photo">사진</div>
-                        <div class="product-category">간식</div>
-                        <div class="product-name">츄르</div>
-                        <div class="product-price">3000</div>
-                        <div class="product-button">
-                            <button type="button" class="btn_modify">수정</button>
-                            <button type="button" class="btn_delete">삭제</button>
+            <div class = "product">
+                <ul class = "product-table">
+                    <!--테이블 헤더-->
+                    <li class="product-list">
+                        <div class="product-content">
+                            <div class="product-category">카테고리</div>
+                            <div class="product-name">상품명</div>
+                            <div class="product-price">가격</div>
                         </div>
-                    </div>
-                </li>
-                <li class="product-list">
-                    <div class="product-content">
-                        <div class="product-num">2</div>
-                        <div class="product-photo">사진</div>
-                        <div class="product-category">간식</div>
-                        <div class="product-name">츄르</div>
-                        <div class="product-price">3000</div>
-                        <div class="product-button">
-                            <button type="button" class="btn_modify">수정</button>
-                            <button type="button" class="btn_delete">삭제</button>
+                    </li>
+                    <!--테이블 바디-->
+                    <li class="product-list">
+                        <div class="product-content">
+                            <div class="product-category">간식</div>
+                            <div class="product-name">츄르</div>
+                            <div class="product-price">3000</div>
+                            <div class="product-button">
+                                <button type="button" class="btn_modify">수정</button>
+                                <button type="button" class="btn_delete">삭제</button>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
 
-            </ul>
+                    {% for i in rs %}
+                    <li class="product-list">
+                        <div class="product-content">
+                            <div class="product-category">{{ i['category'] }}</div>
+                            <div class="product-name">{{ i['name'] }}</div>
+                            <div class="product-price">{{ i['cost'] }}</div>
+                            <div class="product-button">
+                                <button type="button" class="btn_modify">수정</button>
+                                <button type="button" class="btn_delete">삭제</button>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
         </div>
+    </body>
+
+    <!-- 팝업1 -->
+    <div id="pop_plus" class="pop_wrap" style="display:none;">
+        <form action='' method='post'>
+            <div class="pop_inner">
+                <h2>상품 등록</h2>
+                <div class = "con">
+                    <table class="type1">
+                        <colgroup>
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th><label for="">상품명</label></th>
+                                <td><input type = "text" placeholder="상품명을 입력하세요" name="name"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">원가</label></th>
+                                <td><input type="number" placeholder="원가를 입력하세요" name="cost"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">인당 할인율</label></th>
+                                <td><input type="number" placeholder="인당할인율을 입력하세요" name="rate"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">구매모임최소인원</label></th>
+                                <td><input type="number" placeholder="최소인원를 입력하세요" name="min"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">구매모임최대인원</label></th>
+                                <td><input type="number" placeholder="최대인원를 입력하세요" name="min"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">모집기한</label></th>
+                                <td><input type="date" placeholder="날짜를 입력하세요" name='deadline'></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">상품 사진</label></th>
+                                <td><input type="file" placeholder="사진을 입력하세요"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">카테고리</label></th>
+                                <td>
+                                    <select name = "category">
+                                        <option value="">카테고리</option>
+                                        <option value="processed food">가공식품</option>
+                                        <option value="cereal">곡류</option>
+                                        <option value="fruit">과일</option>
+                                        <option value="seafood">수산물</option>
+                                        <option value="snack">스낵</option>
+                                        <option value="meat">육류</option>
+                                        <option value="beverage">음료</option>
+                                        <option value="magic powder">조미료</option>
+                                        <option value="vegetable">채소</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+                <button type = "submit">등록</button> 
+            </div>
+        </form>
     </div>
-</body>
 
-<script>
-    var nickname = "도깡이";
-    var product_count = "20";
-    document.getElementById("nickname").innerHTML = "판매자 " + nickname;
-    document.getElementById("product-count").innerHTML = nickname+ "네 총 등록 상품 : "+product_count+" 개";
+    <script>
+        var nickname = "도깡이";
+        var product_count = "20";
+        document.getElementById("nickname").innerHTML = "판매자 " + nickname;
+        document.getElementById("product-count").innerHTML = nickname+ "네 총 등록 상품 : "+product_count+" 개";
 
-    var target = document.querySelector('.open'); // 클릭할 버튼요소를 변수 처리
-    var btnPopClose = document.querySelector('.close');
-    var btnProdectRegister = document.querySelector('.btn_registration');
-    var targetID;
+        var target = document.querySelector('.open'); // 클릭할 버튼요소를 변수 처리
+        var btnPopClose = document.querySelector('.close');
+        var btnProdectRegister = document.querySelector('.btn_registration');
+        var targetID;
 
-    // 팝업 열기
-    target.addEventListener('click', function(){
-        targetID = this.getAttribute('href');
-        document.querySelector(targetID).style.display = 'block';
-    });
+        // 팝업 열기
+        target.addEventListener('click', function(){
+            targetID = this.getAttribute('href');
+            document.querySelector(targetID).style.display = 'block';
+        });
 
-    // 팝업 닫기
-    btnPopClose.addEventListener('click', function(){
-    this.parentNode.parentNode.style.display = 'none';
-    });
+        // 팝업 닫기
+        btnPopClose.addEventListener('click', function(){
+            document.querySelector(targetID).style.display = 'none';
+        });
 
-</script>
+    </script>
 
 </html>

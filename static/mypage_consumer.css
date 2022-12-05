@@ -11,6 +11,7 @@ header{
     height: 12%;
     border-bottom: 1.5px solid rgb(183, 182, 182);
     align-items: center;
+    box-shadow: 1px 3px 8px 3px lightgray;
 }
 .logo a{
     float: left;
@@ -24,6 +25,7 @@ header{
     padding-right: 50px;
     padding-top: 20px;
 }
+
 .menu-bar a {
     display: inline-block;
     font-size: 15px; color: #999;
@@ -34,10 +36,17 @@ header{
     display: inline-block;
 }
 
+.menu-bar #nickname{
+    color: rgb(75, 189, 75);
+    font-weight: 700;
+    font-size: 20px;
+}
+
 .menu-left{
-    width: 30%;
+    width: 20%;
     height: 100%;
     float: left;
+    border-right: 1px solid #dcdee3;
 }
 
 .vertical-menu{
@@ -51,21 +60,23 @@ header{
     text-align: center;
     padding: 8px;
     background-color: white;
-    border: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
 .content{
     float: right;
-    width: 70%;
+    width: 75%;
     height: 100%;
     margin: auto;
 }
 
 .info{
+    margin: 0 auto;
+    padding: 20px;
     position: relative;
     display: inline-block;
     width: 100%;
-    height: 20%;
+    height: 15%;
 }
 
 .info div{
@@ -76,7 +87,7 @@ header{
 
 .content_upper{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 30%;
 }
 .open
@@ -137,17 +148,89 @@ header{
 table.type1 th{ font-size: 13px; color: #222; text-align: left; font-weight: normal;}
 table.type1 th span{color : #de4f41}
 table.type1 th em{color: #999;}
+
 .product{
-    position: relative;
-    width: 100%;
+    display: grid;
+    width: 70%;
     height: 80%;
+    padding: 10px;
+    margin: 0 auto;
 }
+.product-table{
+    padding: 0;
+    width: 80%;
+}
+
+.product-list {
+    display: block;
+    position: relative;
+}
+
+.product-content {
+    display: grid;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #dcdee3;
+    grid-template:
+        "name price deadline btn" auto / 150px 200px 150px max-content;
+}
+
+.product-deadline {
+    display: flex;
+    grid-area: deadline;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    margin-left: 1.5rem;
+}
+
+.product-name {
+    display: flex;
+    grid-area: name;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    margin-left: 1.5rem;
+}
+
+.product-price {
+    display: flex;
+    grid-area: price;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    margin-left: 1.5rem;
+}
+
+.product-button {
+    display: flex;
+    margin-left: 70px;
+    flex-direction: column;
+    grid-area: btn;
+}
+
+.product-table thead{
+    width: 100%;
+    height: 60px;
+}
+
 .product-table tr{
-    position: absolute;
+    height: 60px;
     left: 20%;
 }
+
 .product-table th{
-    padding: 40px;
+    height: 60px;
+    padding: 20px;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+.product-table td{
+    text-align: center;
+    height: 60px;
+    padding: 20px;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
 }
 
 a{
