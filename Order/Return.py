@@ -23,6 +23,14 @@ class Return:
 
     def dbInsert(self):
         self.__dbInit()
+        self.cur.execute("""select * from returning where order_id='%s'
+                                   """ % (self.__order_id))
+        rs = self.cur.fetchall()
+        if len(rs) > 0:
+            self.conn.commit()
+            self.cur.close()
+            return False
+        
         self.cur.execute("""INSERT INTO returning
                                    VALUES('%s', '%s', '%s');
                                    """
@@ -33,7 +41,7 @@ class Return:
     def dbRetrieve(self, order_id):
         self.__dbInit()
         rs = self.cur.execute("""select * from returning where order_id='%s'
-                                   """ % (order_id))
+                                   """ % (self.__order_id))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values
 
