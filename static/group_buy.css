@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+*{
+    margin:0; 
+    padding: 0;
+}
+html, body{
+    margin: 0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+}
+header{
+    width: 100%;
+    height: 12%;
+    border-bottom: 1.5px solid rgb(183, 182, 182);
+    align-items: center;
+}
+
+.logo a{
+    float: left;
+    padding-left: 20px;
+    padding: 10px;
+    margin-left: 50px;
+}
+
+.logo div{
+    float: left;
+    padding-top: 30px;
+    font-size:18px; color: #999;
+}
+.menu-bar{
+    float: right;
+    padding-right: 50px;
+    padding-top: 20px;
+}
+.menu-bar a{
+    display: inline-block;
+    font-size: 15px; color: #999;
+    padding:10px;
+}
+
+.menu-bar a div{
+    display: inline-block;
+}
+
+a{
+    text-decoration: none;
+}
+a{
+    font-size: 15px; color: #999;
+    text-decoration: none; 
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+a:focus{
+    text-decoration: none;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+}
+
+details{
+    float:right;
+    margin: 10px;
+}
+
+select{
+    float: right;
+    margin: 13px;
+}   
+
+.group_list{
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
+.name{
+    float: left;
+    margin-left: 100px;
+}
+.price{
+    float:left;
+    margin-left: 100px;
+}
+
+.num{
+    float:left;
+    margin-left: 100px;
+}
+
+.day{
+    float: left;
+    margin-left: 100px;
+}
