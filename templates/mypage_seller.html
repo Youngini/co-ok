@@ -28,9 +28,9 @@
             <div class = "content_upper">
                 <div id = "product-count"></div>
                 <div>
-                    <a href="#pop_plus" class = "open"> <img src = "plus.png"; width="30px"></a>
+                    <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
 
-                      <!-- 팝업1 -->
+                    <!-- 팝업1 -->
                     <div id="pop_plus" class="pop_wrap" style="display:none;">
                         <div class="pop_inner">
                             <h2>상품 등록</h2>
@@ -84,7 +84,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#a" class = "close"><img src = "close.png"; width="30px"></a>
+                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
                             <a href="#a" class = "register">등록</a>
                         </div>
                     </div>
@@ -93,34 +93,47 @@
             </div>
         </div>
 
-          
-
         <div class = "product">
-            <table class = "product-table">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>사진</th>
-                        <th>카테고리</th>
-                        <th>상품명</th>
-                        <th>가격</th>
-                    </tr>
-                </thead>
-            </table>
+            <ul class = "product-table">
+                <!--테이블 헤더-->
+                <li class="product-list">
+                    <div class="product-content">
+                        <div class="product-num">번호</div>
+                        <div class="product-photo">사진</div>
+                        <div class="product-category">카테고리</div>
+                        <div class="product-name">상품명</div>
+                        <div class="product-price">가격</div>
+                    </div>
+                </li>
+                <!--테이블 바디-->
+                <li class="product-list">
+                    <div class="product-content">
+                        <div class="product-num">1</div>
+                        <div class="product-photo">사진</div>
+                        <div class="product-category">간식</div>
+                        <div class="product-name">츄르</div>
+                        <div class="product-price">3000</div>
+                        <div class="product-button">
+                            <button type="button" class="btn_modify">수정</button>
+                            <button type="button" class="btn_delete">삭제</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="product-list">
+                    <div class="product-content">
+                        <div class="product-num">2</div>
+                        <div class="product-photo">사진</div>
+                        <div class="product-category">간식</div>
+                        <div class="product-name">츄르</div>
+                        <div class="product-price">3000</div>
+                        <div class="product-button">
+                            <button type="button" class="btn_modify">수정</button>
+                            <button type="button" class="btn_delete">삭제</button>
+                        </div>
+                    </div>
+                </li>
 
-            <tbody>
-                {%for i in data_list %}
-                <tr>
-                    <td>{{ i[0] }}</td>
-                    <td>{{ i[1] }}</td>
-                    <td>{{ i[2] }}</td>
-                    <td>{{ i[3] }}</td>
-                    <td>{{ i[4] }}</td>
-                    <button type="button" class="btn_modify">수정</button>
-                    <button type="button" class="btn_delete">삭제</button>
-                </tr>
-                {% endfor %}
-            </tbody>
+            </ul>
         </div>
     </div>
 </body>
@@ -139,12 +152,12 @@
     // 팝업 열기
     target.addEventListener('click', function(){
         targetID = this.getAttribute('href');
-         document.querySelector(targetID).style.display = 'block';
+        document.querySelector(targetID).style.display = 'block';
     });
 
     // 팝업 닫기
     btnPopClose.addEventListener('click', function(){
-      this.parentNode.parentNode.style.display = 'none';
+    this.parentNode.parentNode.style.display = 'none';
     });
 
 </script>
