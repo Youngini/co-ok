@@ -8,21 +8,23 @@
 </head>
 <header>
     <div class = "logo">
-        <a href=""> <img src = "smallLogo.png"; width="175px"></a>
+        <a href=""> <img src = "../static/smallLogo.png"; width="175px"></a>
         <div>공동 구매</div>
     </div>
     <div class = "menu-bar">
         <a href = "">소비자 <div id = "nickname"></div></a>
-        <a href="mypage_customer.html">마이 페이지</a>
-        <a href="login.html">로그아웃</a> 
+        <a href="/mypage_customer">마이 페이지</a>
+        <a href="/login">로그아웃</a> 
     </div>
 </header>
 
 <body>
-    <div class="search:" style="text-align: left;">
-        <input type="text" placeholder="츄르">
-        <button class="btn_search" type="submit"><img src="btn_search.png" height="15"></button>
-    </div>
+    <form action = "/search" method="post">
+            <div class="search">
+                <input class = "search_bar"type="text" placeholder="상품명을 입력하세요", name="searching">
+                <button class="btn_search" type="submit"><img src="../static/btn_search.png" height="15" ></button>
+            </div>
+        </form>
 
     <details>
         <summary>카테고리</summary>
@@ -44,6 +46,38 @@
         <option value = "가격 높은 순">가격 높은 순</option>
         <option value = "리뷰 많은 순">리뷰 많은 순</option>
     </select>   
+	
+    <div class="wrap">
+	    <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
+            <div id="pop_plus" class="pop_wrap" style="display:none;">
+                <div class="pop_inner">
+                <form action='/participate' method='post'>
+                
+                    <h2>상품 등록</h2>
+                    <div class = "con">
+                        <table class="type1">
+                            <colgroup>
+                                <col>
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th><label for="">공동 구매 모임명</label></th>
+                                    <td><input type = "text" placeholder="공동 구매 모임명을 입력하세요" name='name'></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="">모임 인원</label></th>
+                                    <td><input type="number" placeholder="인원 입력하세요" name='personnel'></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <input type='hidden' name='listvalue' value="{{identifier}}">
+                <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+                <button type = "submit">등록</button> 
+                </div>
+                </form>
+        </div>
+    </div>
 
     <div class = "group_list">
 
@@ -52,38 +86,20 @@
             <th>모임 이름</th>
             <th>가격</th>
             <th>모임 인원</th>
-            <th>남은 일 수</th>
+            <th>참여</th>
+			{% for i in range(lens) %}
+			<form action = '/participate' method = 'post'>
             <tr>
-               
-                <td><img src = "group.png" width="100" height="100" align="center"></td>
-                <td><div class="name"><a href = "">도깡이 귀여워 모임</a></div></td>
-                <td><div class="price"><i>1,200원</i></div></td>
-                <td><div class="num">48/50</div></td>
-                <td><div class="day">D-3</div></td>
-            <tr>
-                <td><img src = "group.png" width="100" height="100" align="center"></td>
-                <td><div class="name">메추리 귀여워 모임</div></td>
-                <td><div class="price"><i>1,200원</i></div></td>
-                <td><div class="num">48/50</div></td>
-                <td><div class="day">D-3</div></td>
-            <tr>
-                <td><img src = "group.png" width="100" height="100" align="center"></td>
-                <td><div class="name">츄르 공동구매</div></td>
-                <td><div class="price"><i>1,200원</i></div></td>
-                <td><div class="num">48/50</div></td>
-                <td><div class="day">D-3</div></td>
-            <tr>
-                <td><img src = "group.png" width="100" height="100" align="center"></td>
-                <td><div class="name">츄르 모임</div></td>
-                <td><div class="price"><i>1,200원</i></div></td>
-                <td><div class="num">48/50</div></td>
-                <td><div class="day">D-3</div></td>
-            <tr>
-                <td><img src = "group.png" width="100" height="100" align="center"></td>
-                <td><div class="name">츄르 사자</div></td>
-                <td><div class="price"><i>1,200원</i></div></td>
-                <td><div class="num">48/50</div></td>
-                <td><div class="day">D-3</div></td>
+                <td><img src = "../static/group.png" width="100" height="100" align="center"></td>
+                <td><div class="name"><a href = "">{{grrs[i]['name']}}</a></div></td>
+                <td><div class="price"><i>{{grrs[i]['dicounted_price']}}</i></div></td>
+                <td><div class="num">{{grcnt[i]['cnt']}} / {{grrs[i]['limit_number']}}</div></td>
+				<td><div class="name"><button type = "submit">참가</button> </div></td>
+				<input type='hidden' name='group_id' value="{{grrs[i]['identifier']}}">
+				<input type='hidden' name='listvalue' value="{{identifier}}">
+                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+            </form>                
+            {% endfor %}
             </table>
 
     </div>
@@ -93,6 +109,22 @@
 <script>
     var nickname = "도깡이";
     document.getElementById("nickname").innerHTML = nickname;
+	
+	var target = document.querySelector('.open'); // 클릭할 버튼요소를 변수 처리
+    var btnPopClose = document.querySelector('.close');
+    var btnProdectRegister = document.querySelector('.btn_registration');
+    var targetID;
+
+    // 팝업 열기
+    target.addEventListener('click', function(){
+        targetID = this.getAttribute('href');
+         document.querySelector(targetID).style.display = 'block';
+    });
+
+    // 팝업 닫기
+    btnPopClose.addEventListener('click', function(){
+      this.parentNode.parentNode.style.display = 'none';
+    });
 </script>
 
 </html>
