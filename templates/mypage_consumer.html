@@ -29,25 +29,25 @@
                 <thead>
                     <tr>
                         <th>이름</th>
-                        <th>구매 인원</th>
+                        <th>구매 개수</th>
                         <th>결제 금액</th>
                     </tr>
                 </thead>
             </table>
-
+<div id = "order_content"></div>
             <tbody>
                 {%for i in rs %}
                 <tr>
                     <td>{{ i['paid_price'] }}원</td>
                     <td>{{ i['product_number'] }}개</td>
                     <td>{{ i['order_date'] }}</td>
-                    <a href="#a" class = "exchange">후기</a></tr></tbody>
+                    <a href="#a">후기</a></tr></tbody>
                     <div class = "content">
         <div class = "info">
             <div class = "content_upper">
-                <div id = "order_content"></div>
+                
                 <div>
- 					<a href="#pop_plus" class = "exchange">교환 환불 신청</a>
+ 					<a href="#pop_plus" class = "exchange" id="{{i['identifier']}}ex">교환 환불 신청</a>
                       <!-- 팝업1 -->
                     <div id="pop_plus" class="pop_wrap" style="display:none;">
                         <div class="pop_inner">
@@ -95,7 +95,7 @@
                                 </table>
                             </div>
 								<input type='hidden' name='identifier' value="{{i['identifier']}}">
-                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
+                            <a href="#a" class = "close" id="{{i['identifier']}}cl"><img src = "../static/close.png"; width="30px"></a>
                             <button type='submit'>제출</button>
 								</form>
                         </div>
@@ -115,9 +115,9 @@
     document.getElementById("nickname").innerHTML = "소비자 " + nickname+"님";
     document.getElementById("order_content").innerHTML = nickname+"님의 주문 내역";
 
-    var target = document.querySelector('.exchange'); // 클릭할 버튼요소를 변수 처리
-    var btnPopClose = document.querySelector('.close');
-    var btnProdectRegister = document.querySelector('.btn_registration');
+	{% for i in rs %}
+    var target = document.getElementById("{{i['identifier']}}ex"); // 클릭할 버튼요소를 변수 처리
+    var btnPopClose = document.getElementById("{{i['identifier']}}cl");
     var targetID;
 
     // 팝업 열기
@@ -130,7 +130,8 @@
     btnPopClose.addEventListener('click', function(){
       this.parentNode.parentNode.style.display = 'none';
     });
-
+	{% endfor %}
+	
 </script>
 
 </html>

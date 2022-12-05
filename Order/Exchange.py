@@ -23,16 +23,16 @@ class Exchange:
 
     def dbInsert(self):
         self.__dbInit()
-        self.cur.execute("""INSERT INTO Exchange
+        self.cur.execute("""INSERT INTO exchange
                                    VALUES('%s', '%s', '%s');
                                    """
-                                   % (self.__reason, self.__order_date, self.__order_id))
+                                   % (self.__order_date, self.__reason, self.__order_id))
         self.conn.commit()
         self.cur.close()
 
     def dbRetrieve(self, order_id):
         self.__dbInit()
-        rs = self.cur.execute("""select * from Exchange where order_id='%s'
+        rs = self.cur.execute("""select * from exchange where order_id='%s'
                                    """ % (order_id))
         rs = self.cur.fetchall()
         rs = pd.DataFrame(rs).values

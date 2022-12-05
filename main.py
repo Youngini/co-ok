@@ -52,7 +52,16 @@ def login():
 def consumer():
     global user
     if request.method == 'POST':
-        pass
+        reason = request.form['reason']
+        identifier = request.form['identifier']
+        if 'refund' in request.form:
+            application = Return(reason, datetime.now().strftime('%Y-%m-%d'), identifier)
+        else:
+            application = Exchange(reason, datetime.now().strftime('%Y-%m-%d'), identifier)
+        
+        application.dbInsert()
+            
+        
     conn = pymysql.connect(
             host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
     cur = conn.cursor(pymysql.cursors.DictCursor)
