@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> mypage_seller </title>
-    <link rel="stylesheet" href = "mypage_seller.css">
+    <link href="{{ url_for('static', filename='mypage_seller.css') }}" rel="stylesheet">
     <script src="jquery-3.4.1js"></script>
 </head>
 <header>
@@ -28,11 +28,10 @@
             <div class = "content_upper">
                 <div id = "product-count"></div>
                 <div>
-                    <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
+                    <a href="#pop_plus" class = "open"> <img src = "plus.png"; width="30px"></a>
 
                       <!-- 팝업1 -->
                     <div id="pop_plus" class="pop_wrap" style="display:none;">
-						<form action='' method='post'>
                         <div class="pop_inner">
                             <h2>상품 등록</h2>
                             <div class = "con">
@@ -43,52 +42,51 @@
                                     <tbody>
                                         <tr>
                                             <th><label for="">상품명</label></th>
-                                            <td><input type = "text" placeholder="상품명을 입력하세요" name='name'></td>
+                                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="">원가</label></th>
-                                            <td><input type="number" placeholder="원가를 입력하세요" name='cost'></td>
+                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="">인당 할인율</label></th>
-                                            <td><input type="number" placeholder="인당할인율을 입력하세요" name='rate'></td>
+                                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
                                         </tr>
                                         <tr>
-                                            <th><label for="">구매모임최소인원</label></th>
-                                            <td><input type="number" placeholder="인원을 입력하세요" name='min'></td>
-                                        </tr>
-										<tr>
-                                            <th><label for="">구매모임최대인원</label></th>
-                                            <td><input type="number" placeholder="인원을 입력하세요" name='max'></td>
+                                            <th><label for="">구매모임인원</label></th>
+                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="">모집기한</label></th>
-                                            <td><input type="date" placeholder="날짜를 입력하세요" name='deadline'></td>
+                                            <td><input type="date" placeholder="날짜를 입력하세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">상품 사진</label></th>
+                                            <td><input type="file" placeholder="사진을 입력하세요"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="">카테고리</label></th>
                                             <td>
                                                 <select name = "category">
                                                     <option value="">카테고리</option>
-                                                    <option value="processed food">가공식품</option>
-                                                    <option value="cereal">곡류</option>
-                                                    <option value="fruit">과일</option>
-                                                    <option value="seafood">수산물</option>
-                                                    <option value="snack">스낵</option>
-                                                    <option value="meat">육류</option>
-                                                    <option value="beverage">음료</option>
-                                                    <option value="magic powder">조미료</option>
-                                                    <option value="vegetable">채소</option>
+                                                    <option value="가공식품">가공식품</option>
+                                                    <option value="곡류">곡류</option>
+                                                    <option value="과일">과일</option>
+                                                    <option value="수산물">수산물</option>
+                                                    <option value="스낵">스낵</option>
+                                                    <option value="육류">육류</option>
+                                                    <option value="음료">음료</option>
+                                                    <option value="조미료">조미료</option>
+                                                    <option value="채소">채소</option>
                                                 </select>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
-                            <button type = "submit">등록</button> 
+                            <a href="#a" class = "close"><img src = "close.png"; width="30px"></a>
+                            <a href="#a" class = "register">등록</a>
                         </div>
-						</form>
                     </div>
 
                 </div>
@@ -101,19 +99,25 @@
             <table class = "product-table">
                 <thead>
                     <tr>
-                        <th>이름</th>
-                        <th>구매 인원</th>
-                        <th>결제 금액</th>
+                        <th>번호</th>
+                        <th>사진</th>
+                        <th>카테고리</th>
+                        <th>상품명</th>
+                        <th>가격</th>
                     </tr>
                 </thead>
             </table>
 
             <tbody>
-                {%for i in rs %}
+                {%for i in data_list %}
                 <tr>
-                    <td>{{ i['name'] }}</td>
-                    <td>{{ i['limit_number'] }}</td>
-                    <td>{{ i['dicounted_price'] }}</td>
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1] }}</td>
+                    <td>{{ i[2] }}</td>
+                    <td>{{ i[3] }}</td>
+                    <td>{{ i[4] }}</td>
+                    <button type="button" class="btn_modify">수정</button>
+                    <button type="button" class="btn_delete">삭제</button>
                 </tr>
                 {% endfor %}
             </tbody>

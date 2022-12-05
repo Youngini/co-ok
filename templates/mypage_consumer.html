@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> mypage_seller </title>
-    <link rel="stylesheet" href = "mypage_consumer.css">
+    <link href="{{ url_for('static', filename='mypage_consumer.css') }}" rel="stylesheet">
     <script src="jquery-3.4.1js"></script>
 </head>
 <header>
@@ -23,36 +23,18 @@
             <li><a href="">결제수단</a></li>
             <li><a href="">배송지</a></li>
         </ul>
-    </div>       
-        <div class = "product">
-            <table class = "product-table">
-                <thead>
-                    <tr>
-                        <th>이름</th>
-                        <th>구매 개수</th>
-                        <th>결제 금액</th>
-                    </tr>
-                </thead>
-            </table>
-<div id = "order_content"></div>
-            <tbody>
-                {%for i in rs %}
-                <tr>
-                    <td>{{ i['paid_price'] }}원</td>
-                    <td>{{ i['product_number'] }}개</td>
-                    <td>{{ i['order_date'] }}</td>
-                    <a href="#a">후기</a></tr></tbody>
-                    <div class = "content">
+    </div> 
+
+    <div class = "content">
         <div class = "info">
             <div class = "content_upper">
-                
+                <div id = "order_content"></div>
                 <div>
- 					<a href="#pop_plus{{i['identifier']}}" class = "exchange" id="{{i['identifier']}}ex">교환 환불 신청</a>
+
                       <!-- 팝업1 -->
-                    <div id="pop_plus{{i['identifier']}}" class="pop_wrap" style="display:none;">
+                    <div id="pop_plus" class="pop_wrap" style="display:none;">
                         <div class="pop_inner">
-							<form action='' method='post'>
-                            <h2>교환 환불 신청</h2>
+                            <h2>교환 신청</h2>
                             <div class = "con">
                                 <table class="type1">
                                     <caption>
@@ -65,26 +47,35 @@
                                         <col>
                                     </colgroup>
                                     <tbody>
-										<th><label for="">환불 교환 선택</label></th>
-                                            <td>
-                                                <ul>
-                                                    <li><input type = "checkbox" name='refund' value=1 id = "ch1"><label for = "ch1">환불</label></li>
-                                                    <li><input type = "checkbox" name='exchange' value=2 id = "ch2"><label for = "ch2">교환</label></li>
-                                                </ul>
-                                            </td>
                                         <tr>
-                                            <th><label for="">과실 종류</label></th>
+                                            <th><label for="">상품명</label></th>
+                                            <td><input type = "text" placeholder="상품명을 입력하세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">주문 개수</label></th>
+                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">주문일자</label></th>
+                                            <td><input type="number" placeholder="인당할인율을 입력하세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">결제금액</label></th>
+                                            <td><input type="number" placeholder="원가를 입력하세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="">교환 종류</label></th>
                                             <td>
                                                 <ul>
-                                                    <li><input type = "checkbox" name = 'seller' id = "ch1"><label for = "ch1">개인적 사유</label></li>
-                                                    <li><input type = "checkbox" name = 'consumer' id = "ch2"><label for = "ch2">판매자측 사유</label></li>
+                                                    <li><input type = "checkbox" id = "ch1"><label for = "ch1">개인적 사유</label></li>
+                                                    <li><input type = "checkbox" id = "ch2"><label for = "ch2">판매자측 사유</label></li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th><label for="">사유</label>(0/1000byte)</th>
+                                            <th><label for="">교환 사유</label>(0/1000byte)</th>
                                             <td>
-                                                <input type="text" name='reason' placeholder="1000자 이내로 적어주세요">
+                                                <input type="text" placeholder="1000자 이내로 적어주세요">
                                             </td>
                                         </tr>
                                         <tr>
@@ -94,20 +85,42 @@
                                     </tbody>
                                 </table>
                             </div>
-								<input type='hidden' name='identifier' value="{{i['identifier']}}">
-                            <a href="#a" class = "close" id="{{i['identifier']}}cl"><img src = "../static/close.png"; width="30px"></a>
-                            <button type='submit'>제출</button>
-								</form>
+                            <a href="#a" class = "close"><img src = "close.png"; width="30px"></a>
+                            <a href="#a" class = "register">제출</a>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-						
-                
-						</div>{% endfor %}
-			</div>
+
+          
+
+        <div class = "product">
+            <table class = "product-table">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>구매 인원</th>
+                        <th>결제 금액</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <tbody>
+                {%for i in rs %}
+                <tr>
+                    <td>{{ i['name'] }}</td>
+                    <td>{{ i['limit_number'] }}</td>
+                    <td>{{ i['dicounted_price'] }}</td>
+                    <a href="#a" class = "exchange">후기</a>
+                    <a href="">교환</a>
+                    <a href="">반품</a>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -115,9 +128,9 @@
     document.getElementById("nickname").innerHTML = "소비자 " + nickname+"님";
     document.getElementById("order_content").innerHTML = nickname+"님의 주문 내역";
 
-	{% for i in rs %}
-    var target = document.getElementById("{{i['identifier']}}ex"); // 클릭할 버튼요소를 변수 처리
-    var btnPopClose = document.getElementById("{{i['identifier']}}cl");
+    var target = document.querySelector('.exchange'); // 클릭할 버튼요소를 변수 처리
+    var btnPopClose = document.querySelector('.close');
+    var btnProdectRegister = document.querySelector('.btn_registration');
     var targetID;
 
     // 팝업 열기
@@ -130,8 +143,7 @@
     btnPopClose.addEventListener('click', function(){
       this.parentNode.parentNode.style.display = 'none';
     });
-	{% endfor %}
-	
+
 </script>
 
 </html>

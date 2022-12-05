@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CO-OK 식품 검색</title>
-    <link rel="stylesheet" href = "search.css">
+    <link href="{{ url_for('static', filename='search.css') }}" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
 </head>
 <header>
@@ -20,12 +20,10 @@
 
 <body>
     
-    <form action='search' method='post'>
     <div class="search:" style="text-align: left;">
-        <input type="text" placeholder="검색" name='searching'>
+        <input type="text" placeholder="츄르">
         <button class="btn_search" type="submit"><img src="../static/btn_search.png" height="15"></button>
     </div>
-    </form>
     
         <details>
         <summary>카테고리</summary>
