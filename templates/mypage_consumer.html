@@ -111,7 +111,7 @@
                 </table>
             </div>
             <a href="#a" class = "close"><img src = "../static/close.png"; width="30px"></a>
-            <button type = "submit"  class = ".btn_registration">제출</button>
+            <button type = "submit" class = "submit">제출</button> 
         </div>
     </div>
     
@@ -120,20 +120,24 @@
         document.getElementById("nickname").innerHTML = "소비자 " + nickname+"님";
         document.getElementById("order_content").innerHTML = nickname+"님의 주문 내역";
     
-        var target = document.querySelector('.btn_change'); // 클릭할 버튼요소를 변수 처리
+        var target = document.querySelector('.open'); // 클릭할 버튼요소를 변수 처리
         var btnPopClose = document.querySelector('.close');
-        var btnProdectRegister = document.querySelector('.btn_registration');
+        var btnProdectRegister = document.querySelector('.submit');
         var targetID;
-    
+
         // 팝업 열기
         target.addEventListener('click', function(){
             targetID = this.getAttribute('href');
             document.querySelector(targetID).style.display = 'block';
         });
-    
+
         // 팝업 닫기
         btnPopClose.addEventListener('click', function(){
-        document.querySelector(targetID).style.display = 'none';
+            document.querySelector(targetID).style.display = 'none';
+        });
+
+        btnProdectRegister.addEventListener('click', function(){
+            document.querySelector(targetID).style.display = 'none';
         });
     
     </script>
