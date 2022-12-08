@@ -19,7 +19,6 @@ from Order.BuyGroup import BuyGroup
 from user.seller.seller import Seller
 
 class Product:
-    # product id는 어떻게?
     def __init__(self, identifier="", product_name="", cost=1, discount_per_person=0, min_group_num=10,
                  max_group_num=10, apply_deadline=str(datetime.today()), category="", seller_id=""):
 
@@ -38,11 +37,6 @@ class Product:
         
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
-        
-        if self.__check_product_number():
-            self.assign_product()
-        else:
-            return None
 
     def __dbInit(self):
         self.conn = pymysql.connect(
