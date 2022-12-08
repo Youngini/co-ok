@@ -5,11 +5,11 @@ from user.consumer.coupon import Coupon
 from user.consumer.payment.card import Card
 from user.consumer.payment.moneyTransfer import MoneyTransfer
 from Product.product import Product
-from Product.Evaluation.evaluation import Evaluation
+from Product.evaluation import Evaluation
 from Order.Ordering import Ordering
 from Order.BuyGroup import BuyGroup
-from Order.Return import Return
-from Order.Exchange import Exchange
+from Afterservice.Return import Return
+from Afterservice.Exchange import Exchange
 import sys
 import pymysql
 import pandas as pd
