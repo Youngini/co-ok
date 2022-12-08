@@ -51,26 +51,23 @@ def login():
 @app.route('/consumer', methods=['POST', 'GET'])
 def consumer():
     global user
-    if request.method == 'POST':
-        reason = request.form['reason']
-        identifier = request.form['identifier']
-        if 'refund' in request.form:
-            application = Return(reason, datetime.now().strftime('%Y-%m-%d'), identifier)
-        else:
-            application = Exchange(reason, datetime.now().strftime('%Y-%m-%d'), identifier)
-        
-        application.dbInsert()
-            
-        
-    conn = pymysql.connect(
-            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
-    cur = conn.cursor(pymysql.cursors.DictCursor)
-    rs = cur.execute("""select * from ordering where consumer_id = '%s'
-                                   """ % (user.get_identifier()))
-    rs = cur.fetchall()
     
-    conn.commit()
-    cur.close()
+    if request.method == 'POST':
+        identifier = request.form['identifier']
+        reason = request.form['reason']
+        
+        order = Ordering().dbRetrieve('identifier')
+        
+        if 'refund' in request.form:
+            application = order.make_returning()
+        else:
+            application = order.make_exchange()
+            
+        application.request_reason(reason)
+        
+    user.dbRetrieve(user.get_identifier())
+    
+    rs = user.get_ordering_list()
     
     return render_template('mypage_consumer.html', rs = rs)
 
@@ -88,16 +85,14 @@ def seller():
         
         
         product = Product(Product.make_identifier(), name, int(cost), int(rate), int(min_num), int(max_num), deadline, category, user.get_identifier())
-        product.dbInsert()
-    
-    conn = pymysql.connect(
-    host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
-    cur = conn.cursor(pymysql.cursors.DictCursor)
-    rs = cur.execute("""select * from product where seller_id = '%s'
-                                   """ % (user.get_identifier()))
-    rs = cur.fetchall()
         
-    return render_template('mypage_seller.html', rs = rs)
+    user.dbRetrieve(user.get_identifier())
+    
+    rs = user.get_item_list()
+    
+    item_nums = user.get_item_number()
+        
+    return render_template('mypage_seller.html', name = user.get_business_name(), rs = rs, item_nums = item_nums)
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
@@ -111,8 +106,6 @@ def search():
                                    """ % (searching))
         rs = cur.fetchall()
         
-        product_list = [Product().dbRetrieve(i['identifier']) for i in rs]
-        
         conn.commit()
         cur.close()
         
@@ -125,16 +118,17 @@ def search():
 
 @app.route('/groups', methods=['POST', 'GET'])
 def groups():
-    if request.method == 'POST':
-        conn = pymysql.connect(
+    conn = pymysql.connect(
             host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
-        cur = conn.cursor(pymysql.cursors.DictCursor)
+    cur = conn.cursor(pymysql.cursors.DictCursor)
+    
+    if request.method == 'POST':
         identifier = request.form['listvalue']
         
-        cur.execute("""select * from buygroup where product_id = '%s'
-                                   """ % (identifier))
+        product = Product(identifier)
+        product.dbRetrieve(identifier)
         
-        grrs = cur.fetchall()
+        grrs = product.get_group_list()
         
         cur.execute("""select buygroup.identifier, count(*) as cnt from ordering, buygroup where ordering.group_id = buygroup.identifier and buygroup.product_id = '%s' group by buygroup.identifier
                                    """ % (identifier))
@@ -146,69 +140,65 @@ def groups():
 @app.route('/participate', methods=['POST', 'GET'])
 def participate():
      if request.method == 'POST':
-        conn = pymysql.connect(
-            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
-        cur = conn.cursor(pymysql.cursors.DictCursor)
-        
-        identifier = request.form['listvalue']
-        if 'name' in request.form:
-            name = request.form['name']
-            personnel = int(request.form['personnel'])
+        if request.method == 'POST':
+            conn = pymysql.connect(
+                host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
+            cur = conn.cursor(pymysql.cursors.DictCursor)
 
-            buygroup = BuyGroup(BuyGroup.make_identifier(), name, personnel, identifier)
+            identifier = request.form['listvalue']
+            if 'name' in request.form:
+                name = request.form['name']
+                personnel = int(request.form['personnel'])
 
-            buygroup.dbInsert()
-            
-            group_id = buygroup.get_identifier()
-        else:
-            group_id = request.form['group_id']
-        
-        cur.execute("""select * from product where identifier = '%s'
-                                   """ % (identifier))
-        pdrs = cur.fetchall()
-        
-        cur.execute("""select * from product, seller where seller.identifier = product.seller_id and product.identifier = '%s'
-                                   """ % (identifier))
-        slrs = cur.fetchall()
-        
-        cur.execute("""select * from buygroup where identifier = '%s'
-                                   """ % (group_id))
-        
-        grrs = cur.fetchall()
-        
-        cur.execute("""select count(*) as cnt from ordering where group_id = '%s' group by group_id
-                                   """ % (group_id))
-        
-        grcnt = cur.fetchall()
-        
-        if len(grcnt) == 0:
-            grcnt = 0
-        else:
-            grcnt = grcnt[0]['cnt']
-        
-        cur.execute("""select * from consumer where identifier = '%s'
-                                   """ % (user.get_identifier()))
-        
-        usrs = cur.fetchall()
+                buygroup = BuyGroup(BuyGroup.make_identifier(), name, personnel, identifier)
+
+                buygroup.dbInsert()
+
+                group_id = buygroup.get_identifier()
+            else:
+                group_id = request.form['group_id']
+
+            cur.execute("""select * from product where identifier = '%s'
+                                       """ % (identifier))
+            pdrs = cur.fetchall()
+
+            cur.execute("""select * from product, seller where seller.identifier = product.seller_id and product.identifier = '%s'
+                                       """ % (identifier))
+            slrs = cur.fetchall()
+
+            cur.execute("""select * from buygroup where identifier = '%s'
+                                       """ % (group_id))
+
+            grrs = cur.fetchall()
+
+            cur.execute("""select count(*) as cnt from ordering where group_id = '%s' group by group_id
+                                       """ % (group_id))
+
+            grcnt = cur.fetchall()
+
+            if len(grcnt) == 0:
+                grcnt = 0
+            else:
+                grcnt = grcnt[0]['cnt']
+
+            cur.execute("""select * from consumer where identifier = '%s'
+                                       """ % (user.get_identifier()))
+
+            usrs = cur.fetchall()
         
         return render_template('participate.html', slrs = slrs, pdrs = pdrs, grrs = grrs, grcnt = grcnt, usrs = usrs)
         
 @app.route('/done', methods=['POST', 'GET'])
 def done():
     if request.method == 'POST':
-        conn = pymysql.connect(
-            host='localhost', user='root', password='Rlatotquf45!', db='cook', charset='utf8')
-        cur = conn.cursor(pymysql.cursors.DictCursor)
         identifier = request.form['identifier']
         personnel = request.form['personnel']
         
-        cur.execute("""select * from buygroup where identifier = '%s'
-                                   """ % (identifier))
+        buygroup = BuyGroup("identifier")
+            
+        buygroup.dbRetrieve(identifier)
         
-        grrs = cur.fetchall()
-        
-        ordering = Ordering(Ordering.make_identifier(), datetime.now().strftime('%Y-%m-%d'), personnel, int(personnel) * int(grrs[0]['dicounted_price']), identifier, user.get_identifier())
-        ordering.dbInsert()
+        buygroup.make_ordering(personnel, user.get_identifier())
         
     return render_template('done.html')
     

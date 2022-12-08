@@ -15,6 +15,7 @@ class Consumer(User):
         super().__init__(identifier, password, phone_number, name)
         self.__location = location  # location 객체
         self.__nick_name = nick_name
+        self.__ordering_list = []
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
@@ -47,6 +48,12 @@ class Consumer(User):
         self.name = rs.item(3)
         self.__location = rs.item(4)
         self.__nick_name = rs.item(5)
+
+        rs = self.cur.execute("""select * from ordering where consumer_id = '%s'
+                                   """ % (self.identifier))
+        rs = self.cur.fetchall()
+        
+        self.__ordering_list = rs
         
     def dbLogin(self, identifier, password):
         self.__dbInit()
@@ -66,12 +73,18 @@ class Consumer(User):
 
     def set_nick_name(self, nick_name):
         self.__nick_name = nick_name
+        
+    def set_ordering_list(self, ordering_list):
+        self.__ordering_list = ordering_list
 
     def get_location(self):
         return self.__location
 
     def get_nick_name(self):
         return self.__nick_name
+    
+    def get_ordering_list(self):
+        return self.__ordering_list
 
     def print(self):
         print(self.identifier)

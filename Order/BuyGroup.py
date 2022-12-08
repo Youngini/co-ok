@@ -3,10 +3,11 @@
 # 상품id product_id
 # 할인 가격 discount_price
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import pymysql
 import pandas as pd
 from datetime import datetime
+from Order.Ordering import Ordering
 
 class BuyGroup:
     def __init__(self, identifier="", name="", limit_number=30, product_id=""):
@@ -45,6 +46,9 @@ class BuyGroup:
         self.__limit_number = rs.item(2)
         self.__product_id = rs.item(3)
         self.__dicounted_price = rs.item(4)
+        
+    def make_ordering(self, personnel, user_identifier):
+        ordering = Ordering(Ordering.make_identifier(), datetime.now().strftime('%Y-%m-%d'), personnel, self.__identifier, user_identifier)
 
     def make_discounted_price(self):
         self.__dbInit()
@@ -52,6 +56,9 @@ class BuyGroup:
                         (self.__product_id))
         rs = self.cur.fetchall()
         rs=pd.DataFrame(rs).values
+        
+        if len(rs) == 0:
+            return False
 
         origin_price = rs.item(0)
         discount_rate = rs.item(1) * 0.01

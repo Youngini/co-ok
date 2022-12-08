@@ -14,8 +14,9 @@ import pymysql
 import pandas as pd
 from datetime import datetime
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-# from Order.BuyGroup import BuyGroup
+#sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from Order.BuyGroup import BuyGroup
+from user.seller.seller import Seller
 
 class Product:
     # product id는 어떻게?
@@ -32,9 +33,16 @@ class Product:
         #self.__product_pict = product_pict
         self.__category = category
         self.__seller_id = seller_id
-
+        
+        self.__group_list = []
+        
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
+        
+        if self.__check_product_number():
+            self.assign_product()
+        else:
+            return None
 
     def __dbInit(self):
         self.conn = pymysql.connect(
@@ -71,6 +79,11 @@ class Product:
         self.__category = rs.item(7)
         self.__seller_id = rs.item(8)
         
+        rs = self.cur.execute("""select * from buygroup where product_id = '%s'
+                                   """ % (self.__identifier))
+        rs = self.cur.fetchall()
+        
+        self.__group_list = rs
 
     def __check_product_number(self):
         self.__dbInit()
@@ -89,22 +102,21 @@ class Product:
             print('product number over')
             return False
         
+        self.rs = self.cur.execute("select * from product where identifier = '%s'" % (self.__identifier))
+        rs = self.cur.fetchall()
+        
+        if len(rs) > 0:
+            return False
+        
         self.dbInsert()
         print('product assign')
         return True
 
     def get_group_list(self):
-        self.__dbInit()
-        self.cur.execute("select * from buygroup where product_id = '%s'" % (self.__identifier))
-        rs=self.cur.fetchall()
-        rs = pd.DataFrame(rs)
-
-        if  len(rs)== 0:
-            print("no groups")
-            return 
-        for group in rs.values:
-            print(group)
-        return rs
+        return self.__group_list
+    
+    def set_group_list(self, group_list):
+        self.__group_list = group_list
         
     def setIdentifier(self, identifier):
         self.__identifier = identifier

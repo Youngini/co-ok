@@ -26,7 +26,7 @@
     <div class = "content">
         <div class = "info">
             <div class = "content_upper">
-                <div id = "product-count"></div>
+                <div id = "product-count">{{name}} 총 등록 상품 {{item_num}}개 </div>
                 <div>
                     <a href="#pop_plus" class = "open"> <img src = "../static/plus.png"; width="30px"></a>
 
@@ -106,9 +106,7 @@
                         <th>결제 금액</th>
                     </tr>
                 </thead>
-            </table>
-
-            <tbody>
+				<tbody>
                 {%for i in rs %}
                 <tr>
                     <td>{{ i['name'] }}</td>
@@ -117,15 +115,14 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            </table>
+
+            
         </div>
     </div>
 </body>
 
 <script>
-    var nickname = "도깡이";
-    var product_count = "20";
-    document.getElementById("nickname").innerHTML = "판매자 " + nickname;
-    document.getElementById("product-count").innerHTML = nickname+ "네 총 등록 상품 : "+product_count+" 개";
 
     var target = document.querySelector('.open'); // 클릭할 버튼요소를 변수 처리
     var btnPopClose = document.querySelector('.close');

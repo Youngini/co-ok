@@ -6,7 +6,9 @@
 import pymysql
 import pandas as pd
 from datetime import datetime
-from Order.BuyGroup import BuyGroup
+#from Order.BuyGroup import BuyGroup
+from Order.Exchange import Exchange
+from Order.Return import Return
 
 
 class Ordering:
@@ -69,6 +71,16 @@ class Ordering:
         rs = pd.DataFrame(rs).values
 
         return rs.item(0)
+    
+    def make_exchange(self):
+        exchange = Exchange("", self.__order_date, self.__identifier)
+        
+        return exchange
+    
+    def make_returning(self):
+        returning = Return("", self.__order_date, self.__identifier)
+        
+        return returning
 	
     def set_order_number(self, order_number):
         self.__order_number = order_number

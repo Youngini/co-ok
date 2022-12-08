@@ -49,6 +49,12 @@ class Return:
         # self.faulty_img = faulty_img
         self.__order_date = rs.item(1)
         self.__order_id = rs.item(2)
+        
+    def request_reason(self, reason):
+        self.__reason = reason
+        self.dbInsert
+        
+        return True
 
     def set_reason(self, reason):
         self.__reason = reason

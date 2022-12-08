@@ -15,6 +15,8 @@ class Seller(User):
         self.__business_address = business_address
         self.__teleselling_registration = teleselling_registration
         self.__buisiness_registration = buisiness_registration
+        
+        self.__item_list = []
 
         self.conn = None  # DB 접속
         self.cur = None  # DB 커서
@@ -55,6 +57,12 @@ class Seller(User):
         self.__business_address = rs.item(8)
         self.__teleselling_registration = rs.item(9)
         self.__buisiness_registration = rs.item(10)
+        
+        rs = self.cur.execute("""select * from product where seller_id = '%s'
+                                   """ % (self.identifier))
+        rs = self.cur.fetchall()
+        
+        self.__item_list = rs
 		
     def dbLogin(self, identifier, password):
         self.__dbInit()
@@ -89,6 +97,9 @@ class Seller(User):
 
     def set_business_registration(self, business_registration):
         self.__business_registration = business_registration
+        
+    def set_item_list(self, item_list):
+        self.__item_list = item_list
 
     def get_business_name(self):
         return self.__business_name
@@ -107,19 +118,12 @@ class Seller(User):
 
     def get_business_registration(self):
         return self.__business_registration
+    
+    def get_item_list(self):
+        return self.__item_list
 
     def get_item_number(self):
-        self.__dbInit()
-        rs = f"select count(*) from product where seller_id = '{self.__identifier}'"
-
-        self.cur.execute(rs)
-        rs = self.cur.fetchall()
-
-        result = pd.DataFrame(rs)
-        self.conn.commit()
-        self.conn.close()
-
-        return result.item(0)
+        return len(self.__item_list)
 
     def print(self):
         print(self.__identifier)
